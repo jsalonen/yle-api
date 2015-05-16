@@ -1,6 +1,6 @@
 # yle-api
 
-Simple node.js client for Yle API (<http://developer.yle.fi/>).
+Client for YLE API (<http://developer.yle.fi/>).
 
 **This library is still very much in prototyping stage so anything can still change.**
 
