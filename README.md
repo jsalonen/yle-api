@@ -16,8 +16,8 @@ In order to use YLE API, you must provide it with your developer API keys. Follo
 
 Authorize the command-line tools with your API keys as follows:
 
-- Make a copy of `.yle-api-example.json` into `yle-api.json`
-- Replace placeholders with your own API keys
+- Copy `.yleapi-EXAMPLE` into your home folder and rename it to `.yleapi`
+- Edit the file to add your own API keys
 
 You can now run command-line tools as follows:
 

@@ -1,9 +1,24 @@
 #!/usr/bin/env node
 
 var fs = require('fs'),
-    yleApiAuth = JSON.parse(fs.readFileSync('yle-api-auth.json', 'utf8')),
-    yleApi = require('../lib/index.js')(yleApiAuth),
+    path = require('path');
     command = (process.argv.length > 2) ? process.argv[2] : null;
+
+var loadYleApiKeys = function() {
+	var getUserHome = function() {
+	  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+	};
+	var yleApiAuthFile = path.join(getUserHome(), '.yleapi');
+	try {
+		return JSON.parse(fs.readFileSync(yleApiAuthFile, 'utf8'));
+	} catch (e) {
+		console.error("Error loading API keys from '" + yleApiAuthFile + "'");
+		console.error(e);
+		process.exit(1);
+	}
+};
+
+var yleApi = require('../lib/index.js')(loadYleApiKeys());
 
 if(!command) {
 	console.log('Usage: yle-api [command] [args...]\n');
