@@ -6,16 +6,18 @@ Client for YLE API (<http://developer.yle.fi/>).
 
 ## Installing
 
-Install dependencies:
+Install the library with:
 
-	npm install
+	npm install yle-api
+
+In order to use YLE API, you must provide it with your developer API keys. Follow the developer site instructions. Note that terms of service apply to any usage of the API, including this client.
 
 ## Using as a command-line tool
 
-Provide your own API keys:
+Authorize the command-line tools with your API keys as follows:
 
-- Copy `yle-api-example.json` into `yle-api.json`
-- Replace placeholder with your own API keys
+- Make a copy of `.yle-api-example.json` into `yle-api.json`
+- Replace placeholders with your own API keys
 
 You can now run command-line tools as follows:
 
@@ -29,6 +31,7 @@ Add yle-api into your package.json:
 
 	npm install --save yle-api
 
-Require and use the library:
+Require the library with your API keys as follows:
 
 	var yleApi = require('yle-api')({appId: '', appKey: '', decryptKey: ''});
+
