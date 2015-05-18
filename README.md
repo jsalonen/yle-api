@@ -2,7 +2,7 @@
 
 Client for YLE API (<http://developer.yle.fi/>).
 
-**This library is still very much in prototyping stage so anything can still change.**
+**UNSTABLE. This library is still very much in its early stages. Anything can still change.**
 
 ## Installing
 
@@ -19,7 +19,9 @@ Provide your own API keys:
 
 You can now run command-line tools as follows:
 
-	npm run decrypt-media-url 1-820561
+	yle-api get-programs
+	yle-api get-program 1-820561
+	yle-api get-program-stream 1-820561
 
 ## Using as a node library
 
