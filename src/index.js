@@ -5,17 +5,19 @@ let URI = require('URIjs');
 let decrypt = require('./decrypt');
 
 const API_URL_DEFAULT = 'https://external.api.yle.fi/v1/';
+const IMAGES_URL_DEFAULT = 'http://images.cdn.yle.fi/image/upload/';
 const EVENT_TEMPORAL_STATUS_CURRENTLY = 'currently';
 const EVENT_TYPE_ONDEMAND_PUBLICATION = 'OnDemandPublication';
 const PROTOCOL_HTTP_LIVE_STREAMING = 'HLS';
 const PROTOCOL_HTTP_DYNAMIC_STREAMING = 'HDS';
 
 class yleApi {
-	constructor(apiAuth, apiUrl = API_URL_DEFAULT) {
+	constructor(apiAuth, apiUrl = API_URL_DEFAULT, imagesUrl = IMAGES_URL_DEFAULT) {
 		this.appId = apiAuth.appId;
 		this.appKey = apiAuth.appKey;
 		this.decryptKey = apiAuth.decryptKey;
 		this.apiUrl = API_URL_DEFAULT;
+		this.imagesUrl = imagesUrl;
 	}
 
 	getPrograms (queryOptions, callback) {
@@ -97,6 +99,17 @@ class yleApi {
 						}
 					});
 			}
+		});
+	}
+
+	getProgramImage(programId, callback) {
+		this.getProgram(programId, (err, program) => {
+			program.image.url =
+				URI(this.imagesUrl)
+					.segment(program.image.id)
+					.suffix('jpg')
+					.toString();
+			callback(null, program.image);
 		});
 	}
 

@@ -26,6 +26,7 @@ if(!command) {
 	console.log('\tget-programs');
 	console.log('\tget-program [programId]');
 	console.log('\tget-program-stream [programId]');
+	console.log('\tget-program-image-url [programId]');
 } else {
 	if(command === 'get-programs') {
 		yleApi.getPrograms({}, function (err, programs) {
@@ -42,6 +43,12 @@ if(!command) {
 		var programId = process.argv[3] || '';
 		yleApi.getProgramStream(programId, function(err, streams) {
 			console.log( JSON.stringify(streams, null, 2) );
+		});
+	}
+	if(command === 'get-program-image') {
+		var programId = process.argv[3] || '';
+		yleApi.getProgramImage(programId, function(err, image) {
+			console.log( JSON.stringify(image, null, 2) );
 		});
 	} else {
 		console.error('Invalid command ' + command);
