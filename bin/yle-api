@@ -9,6 +9,7 @@ if(!command) {
 	console.log('Usage: yle-api [command] [args...]\n');
 	console.log('Commands:\n');
 	console.log('\tget-programs');
+	console.log('\tget-program [programId]');
 	console.log('\tget-program-stream [programId]');
 } else {
 	if(command === 'get-programs') {
