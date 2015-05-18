@@ -1,6 +1,6 @@
 {
   "name": "yle-api",
-  "version": "0.0.1-alpha4",
+  "version": "0.0.1-alpha5",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
