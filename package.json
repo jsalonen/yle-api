@@ -1,6 +1,6 @@
 {
   "name": "yle-api",
-  "version": "0.0.1-alpha3",
+  "version": "0.0.1-alpha4",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "build": "./node_modules/.bin/babel src --out-dir lib",
     "build:watch": "./node_modules/.bin/babel --watch src --out-dir lib",
     "get-playable-media": "./node_modules/.bin/babel-node tools/get-playable-media.js"
+  },
+  "bin": {
+    "yle-api": "./bin/yle-api"
   },
   "author": "",
   "license": "ISC",
