@@ -2,7 +2,7 @@
 
 Client for YLE API (<http://developer.yle.fi/>).
 
-**UNSTABLE. This library is still very much in its early stages. Anything can still change.**
+**Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
 ## Installing
 
