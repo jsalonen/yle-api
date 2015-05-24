@@ -12,7 +12,8 @@
   "bin": {
     "yle-api": "./bin/yle-api"
   },
-  "author": "",
+  "author": "Jaakko Salonen",
+  "homepage": "https://github.com/jsalonen/yle-api",
   "license": "ISC",
   "dependencies": {
     "URIjs": "^1.15.1",
