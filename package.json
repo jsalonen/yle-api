@@ -6,8 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers js:babel/register test/**/*.js",
     "build": "./node_modules/.bin/babel src --out-dir lib",
-    "build:watch": "./node_modules/.bin/babel --watch src --out-dir lib",
-    "get-playable-media": "./node_modules/.bin/babel-node tools/get-playable-media.js"
+    "build:watch": "./node_modules/.bin/babel --watch src --out-dir lib"
   },
   "bin": {
     "yle-api": "./bin/yle-api"
