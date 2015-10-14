@@ -1,6 +1,6 @@
 # yle-api
 
-Client for YLE API (<http://developer.yle.fi/>).
+Client for Yle API (<http://developer.yle.fi/>).
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
@@ -10,7 +10,7 @@ Install the library with:
 
 	npm install yle-api
 
-In order to use YLE API, you must provide it with your developer API keys. Follow the developer site instructions. Note that terms of service apply to any usage of the API, including this client.
+In order to use Yle API, you must provide it with your developer API keys. Follow the developer site instructions. Note that terms of service apply to any usage of the API, including this client.
 
 ## Using as a command-line tool
 
