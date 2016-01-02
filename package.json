@@ -4,9 +4,9 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jasmine",
-    "install": "./node_modules/.bin/babel src --out-dir lib",
-    "watch": "./node_modules/.bin/babel --watch src --out-dir lib"
+    "test": "node node_modules/.bin/jasmine",
+    "install": "node node_modules/.bin/babel src --out-dir lib",
+    "watch": "node node_modules/.bin/babel --watch src --out-dir lib"
   },
   "bin": {
     "yle-api": "./bin/yle-api"
