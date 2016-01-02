@@ -1,4 +1,4 @@
-# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/jsalonen/yle-api/badge.svg?branch=master&service=github)](https://coveralls.io/github/jsalonen/yle-api?branch=master)
+# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/jsalonen/yle-api/badge.svg?branch=master&service=github&cachebust=1)](https://coveralls.io/github/jsalonen/yle-api?branch=master)
 
 Unofficial Node.js SDK for Yle API (<http://developer.yle.fi/>).
 
