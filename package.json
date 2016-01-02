@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "node node_modules/.bin/jasmine",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine && cat ./coverage/lcov.info | node_modules/.bin/coveralls && rm -rf ./coverage",
     "install": "node node_modules/.bin/babel src --out-dir lib",
     "watch": "node node_modules/.bin/babel --watch src --out-dir lib"
   },
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "babel": "^5.4.3",
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.1",
     "jasmine": "^2.4.1",
     "nock": "^3.6.0"
   }
