@@ -1,25 +1,23 @@
-// Media URL decryption module
-// Modified from: http://developer.yle.fi/static/decrypt-url.js
 'use strict';
 
-let CryptoJS = require('crypto-js/core');
-require('crypto-js/cipher-core');
-require("crypto-js/aes");
-require('crypto-js/enc-base64');
+var crypto = require('crypto');
 
-module.exports = (url, decryptKey) => {
-  var data = CryptoJS.enc.Base64.parse( url ).toString(CryptoJS.enc.Hex);
-  var key = CryptoJS.enc.Utf8.parse( decryptKey ) ;
-  var iv = CryptoJS.enc.Hex.parse( data.substr(0, 32) );
-  var message = CryptoJS.enc.Hex.parse( data.substr(32) );
+function decrypt(encryptedUrl, decryptKey) {
+  // Decrypt Media URLs with node's built-in crypto module
+  // For the reference implementation with Crypto-JS, see:
+  // http://developer.yle.fi/static/decrypt-url.js
 
-  var options = {
-	iv: iv,
-	mode: CryptoJS.mode.CBC,
-	padding: CryptoJS.pad.Pkcs7
-  };
+  var data = new Buffer(encryptedUrl, 'base64').toString('hex');
+  var encryptdata = new Buffer(data.substr(32), 'hex').toString('binary');
+  var ivBuffer = new Buffer(data.substr(0, 32), 'hex');
+  var decryptKeyBuffer = new Buffer(decryptKey, 'utf8');
 
-  var params = CryptoJS.lib.CipherParams.create( {ciphertext: message} );
-  var decryptedMessage = CryptoJS.AES.decrypt( params, key, options );
-  return decryptedMessage.toString( CryptoJS.enc.Utf8 );
-};
+  var decipher = crypto.createDecipheriv('aes128', decryptKeyBuffer, ivBuffer);
+  var decoded = decipher.update(encryptdata);
+  decoded += decipher.final();
+
+  return decoded;
+}
+
+module.exports = decrypt;
+
