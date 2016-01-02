@@ -33,20 +33,17 @@ if(!command) {
     yleApi.getPrograms({}, function (err, programs) {
       console.log( JSON.stringify(programs, null, 2) );
     });
-  }
-  if(command === 'get-program') {
+  } else if(command === 'get-program') {
     var programId = process.argv[3] || '';
     yleApi.getProgram(programId, function(err, streams) {
       console.log( JSON.stringify(streams, null, 2) );
     });
-  }
-  if(command === 'get-program-stream') {
+  } else if(command === 'get-program-stream') {
     var programId = process.argv[3] || '';
     yleApi.getProgramStream(programId, function(err, streams) {
       console.log( JSON.stringify(streams, null, 2) );
     });
-  }
-  if(command === 'get-program-image') {
+  } else if(command === 'get-program-image') {
     var programId = process.argv[3] || '';
     yleApi.getProgramImage(programId, function(err, image) {
       console.log( JSON.stringify(image, null, 2) );
