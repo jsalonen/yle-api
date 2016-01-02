@@ -1,6 +1,6 @@
 # yle-api
 
-Client for Yle API (<http://developer.yle.fi/>).
+Unofficial Node.js SDK for Yle API (<http://developer.yle.fi/>).
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 

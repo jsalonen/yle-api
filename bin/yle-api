@@ -1,56 +1,57 @@
 #!/usr/bin/env node
 
-var fs = require('fs'),
-    path = require('path');
-    command = (process.argv.length > 2) ? process.argv[2] : null;
+var fs = require('fs');
+var path = require('path');
+var command = (process.argv.length > 2) ? process.argv[2] : null;
 
-var loadYleApiKeys = function() {
-	var getUserHome = function() {
-	  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-	};
-	var yleApiAuthFile = path.join(getUserHome(), '.yleapi');
-	try {
-		return JSON.parse(fs.readFileSync(yleApiAuthFile, 'utf8'));
-	} catch (e) {
-		console.error("Error loading API keys from '" + yleApiAuthFile + "'");
-		console.error(e);
-		process.exit(1);
-	}
+function getUserHome() {
+  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
+function loadYleApiKeys() {
+  var yleApiAuthFile = path.join(getUserHome(), '.yleapi');
+  try {
+  return JSON.parse(fs.readFileSync(yleApiAuthFile, 'utf8'));
+  } catch (e) {
+    console.error("Error loading API keys from '" + yleApiAuthFile + "'");
+    console.error(e);
+    process.exit(1);
+  }
 };
 
 var yleApi = require('../lib/index.js')(loadYleApiKeys());
 
 if(!command) {
-	console.log('Usage: yle-api [command] [args...]\n');
-	console.log('Commands:\n');
-	console.log('\tget-programs');
-	console.log('\tget-program [programId]');
-	console.log('\tget-program-stream [programId]');
-	console.log('\tget-program-image-url [programId]');
+  console.log('Usage: yle-api [command] [args...]\n');
+  console.log('Commands:\n');
+  console.log('\tget-programs');
+  console.log('\tget-program [programId]');
+  console.log('\tget-program-stream [programId]');
+  console.log('\tget-program-image-url [programId]');
 } else {
-	if(command === 'get-programs') {
-		yleApi.getPrograms({}, function (err, programs) {
-			console.log( JSON.stringify(programs, null, 2) );
-		});
-	}
-	if(command === 'get-program') {
-		var programId = process.argv[3] || '';
-		yleApi.getProgram(programId, function(err, streams) {
-			console.log( JSON.stringify(streams, null, 2) );
-		});
-	}
-	if(command === 'get-program-stream') {
-		var programId = process.argv[3] || '';
-		yleApi.getProgramStream(programId, function(err, streams) {
-			console.log( JSON.stringify(streams, null, 2) );
-		});
-	}
-	if(command === 'get-program-image') {
-		var programId = process.argv[3] || '';
-		yleApi.getProgramImage(programId, function(err, image) {
-			console.log( JSON.stringify(image, null, 2) );
-		});
-	} else {
-		console.error('Invalid command ' + command);
-	}
+  if(command === 'get-programs') {
+    yleApi.getPrograms({}, function (err, programs) {
+      console.log( JSON.stringify(programs, null, 2) );
+    });
+  }
+  if(command === 'get-program') {
+    var programId = process.argv[3] || '';
+    yleApi.getProgram(programId, function(err, streams) {
+      console.log( JSON.stringify(streams, null, 2) );
+    });
+  }
+  if(command === 'get-program-stream') {
+    var programId = process.argv[3] || '';
+    yleApi.getProgramStream(programId, function(err, streams) {
+      console.log( JSON.stringify(streams, null, 2) );
+    });
+  }
+  if(command === 'get-program-image') {
+    var programId = process.argv[3] || '';
+    yleApi.getProgramImage(programId, function(err, image) {
+      console.log( JSON.stringify(image, null, 2) );
+    });
+  } else {
+    console.error('Invalid command ' + command);
+  }
 }
