@@ -1,7 +1,7 @@
 'use strict';
 
 let request = require('request');
-let URI = require('URIjs');
+let URI = require('urijs');
 let decrypt = require('./decrypt');
 
 const API_URL = 'https://external.api.yle.fi/v1/';

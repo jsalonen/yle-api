@@ -1,6 +1,6 @@
 var path = require('path');
 var nock = require('nock');
-var URI = require('URIjs');
+var URI = require('urijs');
 var querystring = require('querystring');
 var YleApi = require('../../lib/index');
 

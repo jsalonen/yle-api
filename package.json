@@ -18,9 +18,9 @@
   },
   "license": "ISC",
   "dependencies": {
-    "URIjs": "^1.15.1",
     "crypto-js": "^3.1.4",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "urijs": "^1.17.0"
   },
   "devDependencies": {
     "babel": "^5.4.3",
