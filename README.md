@@ -35,13 +35,15 @@ For documentation, check help:
 
 ## Using as a node library
 
-Add yle-api into your package.json:
+Install and add as a dependency:
 
 	npm install --save yle-api
 
-Require the library with your API keys as follows:
+Require and create a client instance:
 
 	var YleApi = require('yle-api');
 	var client = new YleApi({appId: '[YOUR_APP_ID]',
 	                         appKey: '[YOUR_APP_KEY]',
 	                         decryptKey: '[YOUR_DECRYPT_KEY]'});
+
+Use the provided methods as you require.
