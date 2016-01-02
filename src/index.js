@@ -1,8 +1,8 @@
 'use strict';
 
-let request = require('request');
-let URI = require('urijs');
-let decrypt = require('./decrypt');
+var request = require('request');
+var URI = require('urijs');
+var media = require('./media');
 
 const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
@@ -142,7 +142,7 @@ class yleApi {
 
   _decryptPlayouts(playouts) {
     return playouts.map( (playout) => {
-      playout.url = decrypt(playout.url, this.decryptKey);
+      playout.url = media.decrypt(playout.url, this.decryptKey);
       return playout;
     });
   }
