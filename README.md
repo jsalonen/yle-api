@@ -36,5 +36,9 @@ Add yle-api into your package.json:
 
 Require the library with your API keys as follows:
 
-	var yleApi = require('yle-api')({appId: '', appKey: '', decryptKey: ''});
+Require the library with your API keys as follows:
 
+	var YleApi = require('yle-api');
+	var client = new YleApi({appId: '[YOUR_APP_ID]',
+	                         appKey: '[YOUR_APP_KEY]',
+	                         decryptKey: '[YOUR_DECRYPT_KEY]'});
