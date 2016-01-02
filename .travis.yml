@@ -4,3 +4,4 @@ node_js:
 script: node_modules/jasmine/bin/jasmine
 before_script:
     - npm install
+    - npm install -g jasmine
