@@ -2,6 +2,7 @@ var path = require('path');
 var nock = require('nock');
 var URI = require('URIjs');
 var querystring = require('querystring');
+var YleApi = require('../../lib/index');
 
 nock.disableNetConnect();
 
@@ -24,8 +25,6 @@ function hasValidCredentials(path) {
 };
 
 describe('YleApi', function() {
-  const YleApi = require('../../lib/');
-
   describe('getPrograms', function() {
     it('should return error with invalid appKey', function(done) {
       nock('https://external.api.yle.fi/v1/')

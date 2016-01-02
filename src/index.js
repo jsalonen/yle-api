@@ -38,8 +38,8 @@ class yleApi {
           if(response.statusCode != 200) {
             callback(response.statusCode, null);
           } else {
-            let {apiVersion, meta, data} = JSON.parse(body);
-            callback(null, data);
+            var response = JSON.parse(body);
+            callback(null, response.data);
           }
         }
       });
