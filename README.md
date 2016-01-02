@@ -26,6 +26,7 @@ You can now run command-line tools as follows:
 	yle-api get-programs
 	yle-api get-program 1-820561
 	yle-api get-program-stream 1-820561
+	yle-api get-program-image 1-820561
 
 ## Using as a node library
 
