@@ -73,4 +73,15 @@ program
     console.log();
   });
 
+program
+  .command('get-stream <programId> [protocol]')
+  .description('Retrieve stream for a program')
+  .option('-ml, --multibitrate <true|false>', '')
+  .option('-hs, --hardsubtitles <true|false>', 'Burn subtitles into stream')
+  .action(function(programId, protocol) {
+    yleApi.getProgramStream(programId, protocol || 'HDS', function (err, stream) {
+      formattedOutput(stream);
+    });
+  });
+  
 program.parse(process.argv);

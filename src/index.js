@@ -8,8 +8,6 @@ const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 const EVENT_TEMPORAL_STATUS_CURRENTLY = 'currently';
 const EVENT_TYPE_ONDEMAND_PUBLICATION = 'OnDemandPublication';
-const PROTOCOL_HTTP_LIVE_STREAMING = 'HLS';
-const PROTOCOL_HTTP_DYNAMIC_STREAMING = 'HDS';
 
 function withCredentials(queryOptions) {
   return Object.assign(queryOptions, {
@@ -72,7 +70,7 @@ class yleApi {
       });
   }
 
-  getProgramStream(programId, callback) {
+  getProgramStream(programId, protocol, callback) {
     this._findPlayableMedia(programId, (err, media) => {
       if(err) {
         return callback(err, null);
@@ -85,7 +83,7 @@ class yleApi {
             .query(withCredentials.bind(this, {
                program_id: programId,
                media_id: media.id,
-               protocol: PROTOCOL_HTTP_LIVE_STREAMING
+               protocol: protocol
             }))
             .toString();
 
