@@ -6,6 +6,8 @@ Unofficial Node.js SDK for Yle API (<http://developer.yle.fi/>).
 
 ## Installing
 
+Requires: node.js v4.0.0 or later.
+
 Install the library with:
 
 	npm install yle-api
