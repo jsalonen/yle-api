@@ -11,6 +11,13 @@ const EVENT_TYPE_ONDEMAND_PUBLICATION = 'OnDemandPublication';
 const PROTOCOL_HTTP_LIVE_STREAMING = 'HLS';
 const PROTOCOL_HTTP_DYNAMIC_STREAMING = 'HDS';
 
+function withCredentials(queryOptions) {
+  return Object.assign(queryOptions, {
+    app_id: this.appId,
+    app_key: this.appKey
+  });
+}
+
 class yleApi {
   constructor(apiAuth) {    
     this.appId = apiAuth.appId;
@@ -19,15 +26,12 @@ class yleApi {
   }
 
   getPrograms (queryOptions, callback) {
-    let url =
+    const url =
       URI(API_URL)
         .segment('programs')
         .segment('items')
         .suffix('json')
-        .query({ app_id: this.appId,
-                 app_key: this.appKey,
-                 offset: queryOptions.offset || 0,
-                 order: queryOptions.order })
+        .query(withCredentials.bind(this, queryOptions))
         .toString();
 
     request
@@ -46,14 +50,13 @@ class yleApi {
   }
 
   getProgram (id, callback) {
-    let url =
+    const url =
       URI(API_URL)
         .segment('programs')
         .segment('items')
         .segment(id)
         .suffix('json')
-        .query({ app_id: this.appId,
-                 app_key: this.appKey })
+        .query(withCredentials.bind(this, {}))
         .toString();
 
     request
@@ -74,16 +77,16 @@ class yleApi {
       if(err) {
         return callback(err, null);
       } else {
-        let url =
+        const url =
           URI(API_URL)
             .segment('media')
             .segment('playouts')
             .suffix('json')
-            .query({ app_id: this.appId,
-                     app_key: this.appKey,
-                     program_id: programId,
-                     media_id: media.id,
-                     protocol: PROTOCOL_HTTP_LIVE_STREAMING })
+            .query(withCredentials.bind(this, {
+               program_id: programId,
+               media_id: media.id,
+               protocol: PROTOCOL_HTTP_LIVE_STREAMING
+            }))
             .toString();
 
         request
@@ -110,6 +113,13 @@ class yleApi {
           .suffix('jpg')
           .toString();
       callback(null, program.image);
+    });
+  }
+
+  _withCredentials (queryOptions) {
+    return Object.assign(queryOptions, {
+      app_id: this.appId,
+      app_key: this.appKey
     });
   }
 
