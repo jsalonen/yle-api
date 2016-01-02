@@ -1,4 +1,4 @@
-# yle-api
+# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master)](https://travis-ci.org/jsalonen/yle-api)
 
 Unofficial Node.js SDK for Yle API (<http://developer.yle.fi/>).
 
