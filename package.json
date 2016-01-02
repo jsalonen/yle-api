@@ -23,6 +23,9 @@
     "request": "^2.55.0"
   },
   "devDependencies": {
-    "babel": "^5.4.3"
+    "babel": "^5.4.3",
+    "jasmine": "^2.4.1",
+    "jasmine-es6": "^0.1.1",
+    "nock": "^3.6.0"
   }
 }

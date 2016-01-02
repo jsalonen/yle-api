@@ -3,6 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var command = (process.argv.length > 2) ? process.argv[2] : null;
+var YleApiClient = require('../lib/index');
 
 function getUserHome() {
   return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
@@ -19,7 +20,7 @@ function loadYleApiKeys() {
   }
 };
 
-var yleApi = require('../lib/index.js')(loadYleApiKeys());
+var yleApi = new YleApiClient(loadYleApiKeys());
 
 if(!command) {
   console.log('Usage: yle-api [command] [args...]\n');

@@ -4,25 +4,23 @@ let request = require('request');
 let URI = require('URIjs');
 let decrypt = require('./decrypt');
 
-const API_URL_DEFAULT = 'https://external.api.yle.fi/v1/';
-const IMAGES_URL_DEFAULT = 'http://images.cdn.yle.fi/image/upload/';
+const API_URL = 'https://external.api.yle.fi/v1/';
+const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 const EVENT_TEMPORAL_STATUS_CURRENTLY = 'currently';
 const EVENT_TYPE_ONDEMAND_PUBLICATION = 'OnDemandPublication';
 const PROTOCOL_HTTP_LIVE_STREAMING = 'HLS';
 const PROTOCOL_HTTP_DYNAMIC_STREAMING = 'HDS';
 
 class yleApi {
-  constructor(apiAuth, apiUrl = API_URL_DEFAULT, imagesUrl = IMAGES_URL_DEFAULT) {
+  constructor(apiAuth) {    
     this.appId = apiAuth.appId;
     this.appKey = apiAuth.appKey;
     this.decryptKey = apiAuth.decryptKey;
-    this.apiUrl = API_URL_DEFAULT;
-    this.imagesUrl = imagesUrl;
   }
 
   getPrograms (queryOptions, callback) {
     let url =
-      URI(this.apiUrl)
+      URI(API_URL)
         .segment('programs')
         .segment('items')
         .suffix('json')
@@ -34,20 +32,22 @@ class yleApi {
 
     request
       .get({url}, (err, response, body) => {
-        let {statusCode, statusMessage} = response;
-
-        if(statusCode != 200) {
-          callback(`${statusCode} ${statusMessage}`, null);
+        if(!response) {
+          return callback(`Invalid response`, null);
         } else {
-          let {apiVersion, meta, data} = JSON.parse(body);
-          callback(null, data);
+          if(response.statusCode != 200) {
+            callback(response.statusCode, null);
+          } else {
+            let {apiVersion, meta, data} = JSON.parse(body);
+            callback(null, data);
+          }
         }
       });
   }
 
   getProgram (id, callback) {
     let url =
-      URI(this.apiUrl)
+      URI(API_URL)
         .segment('programs')
         .segment('items')
         .segment(id)
@@ -75,7 +75,7 @@ class yleApi {
         return callback(err, null);
       } else {
         let url =
-          URI(this.apiUrl)
+          URI(API_URL)
             .segment('media')
             .segment('playouts')
             .suffix('json')
@@ -105,7 +105,7 @@ class yleApi {
   getProgramImage(programId, callback) {
     this.getProgram(programId, (err, program) => {
       program.image.url =
-        URI(this.imagesUrl)
+        URI(IMAGES_URL)
           .segment(program.image.id)
           .suffix('jpg')
           .toString();
@@ -138,6 +138,4 @@ class yleApi {
   }
 };
 
-module.exports = (apiAuth, apiUrl) => {
-  return new yleApi(apiAuth, apiUrl);
-};
+module.exports = yleApi;

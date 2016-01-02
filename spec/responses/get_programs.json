@@ -1,0 +1,76 @@
+[
+  {
+    "description": {
+      "fi": "Description 1 Line 1\r\nDescription 1 Line 2\r\n\r\n"
+    },
+    "video": {},
+    "creator": [],
+    "indexDataModified": "2014-10-03T13:40:24.614+03:00",
+    "alternativeId": [
+      "12-1021-4-379522"
+    ],
+    "type": "RadioProgram",
+    "duration": "PT45M",
+    "contentRating": {
+      "title": {},
+      "reason": []
+    },
+    "title": {
+      "fi": "Title 1"
+    },
+    "itemTitle": {},
+    "countryOfOrigin": [],
+    "id": "1-2386316",
+    "typeCreative": "Program",
+    "image": {},
+    "audio": [],
+    "originalTitle": {},
+    "publicationEvent": [
+      {
+        "service": {
+          "id": "yle-puhe"
+        },
+        "startTime": "2014-10-05T06:03:00+03:00",
+        "temporalStatus": "in-past",
+        "endTime": "2014-10-05T06:48:00+03:00",
+        "type": "ScheduledTransmission",
+        "duration": "PT45M",
+        "region": "World",
+        "id": "4-3747071",
+        "media": {}
+      }
+    ],
+    "collection": "main",
+    "subject": [
+      {
+        "id": "5-218",
+        "title": {
+          "fi": "Fakta ja Kulttuuri",
+          "sv": "Fakta och kultur"
+        },
+        "broader": {
+          "id": "5-200"
+        },
+        "inScheme": "areena-content-classification",
+        "type": "Concept",
+        "key": "faktajakulttuuri"
+      },
+      {
+        "id": "21-2",
+        "title": {
+          "fi": "Ajankohtaisohjelmat",
+          "en": "Current Affairs"
+        },
+        "inScheme": "finnpanel-genre-classification",
+        "type": "Concept",
+        "notation": [
+          {
+            "value": "2",
+            "valueType": "finnpanel-notation"
+          }
+        ]
+      }
+    ],
+    "subtitling": []
+  }
+]
