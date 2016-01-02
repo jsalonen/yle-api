@@ -3,30 +3,20 @@
 var crypto = require('crypto');
 
 function decrypt(message, key) {
-  // Decrypt Media URLs with node's built-in crypto module
-  // For the reference implementation with Crypto-JS, see:
-  // http://developer.yle.fi/static/decrypt-url.js
-  var data = new Buffer(message, 'base64').toString('hex');
-  var encryptdata = new Buffer(data.substr(32), 'hex').toString('binary');
-  var ivBuffer = new Buffer(data.substr(0, 32), 'hex');
-  var decryptKeyBuffer = new Buffer(key, 'utf8');
+  const data = new Buffer(message, 'base64').toString('hex');
+  const payload = new Buffer(data.substr(32), 'hex');  
+  const iv = new Buffer(data.substr(0, 32), 'hex');
+  const decipher = crypto.createDecipheriv('aes128', key, iv);
 
-  var decipher = crypto.createDecipheriv('aes128', decryptKeyBuffer, ivBuffer);
-  var decoded = decipher.update(encryptdata);
-  decoded += decipher.final();
-
-  return decoded;
+  return decipher.update(payload) + decipher.final();
 }
 
-function encrypt(message, key, iv) {
-  var ivBuffer = new Buffer(iv || crypto.randomBytes(16).toString('hex'), 'hex');
-  var decryptKeyBuffer = new Buffer(key, 'utf-8').toString('binary');
-  var encipher = crypto.createCipheriv('aes-128-cbc', decryptKeyBuffer, ivBuffer.toString('binary'));
-  var encryptdata = encipher.update(message);
-
-  var crypted = Buffer.concat([
-    new Buffer(ivBuffer, 'hex'),
-    new Buffer(encryptdata, 'binary'),
+function encrypt(message, key, customIv) {
+  const iv = new Buffer(customIv || crypto.randomBytes(16), 'hex');
+  const encipher = crypto.createCipheriv('aes-128-cbc', key, iv);
+  const crypted = Buffer.concat([
+    iv,
+    new Buffer(encipher.update(message), 'binary'),
     new Buffer(encipher.final())
   ]);
 
