@@ -1,6 +1,6 @@
 # yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/jsalonen/yle-api/badge.svg?branch=master&service=github&cachebust=1)](https://coveralls.io/github/jsalonen/yle-api?branch=master)
 
-Unofficial Node.js SDK for Yle API (<http://developer.yle.fi/>).
+Unofficial Node.js SDK for Yle API
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
@@ -12,7 +12,11 @@ Install the library with:
 
 	npm install yle-api
 
-In order to use Yle API, you must provide it with your developer API keys. Follow the developer site instructions. Note that terms of service apply to any usage of the API, including this client.
+In order to use Yle API, you must provide it with your developer API keys, which you can order from the developer site at:
+
+http://developer.yle.fi/
+
+Note that terms of service apply to any usage of the API, including this client.
 
 ## Using command-line tool
 
