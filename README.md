@@ -12,7 +12,7 @@ You must provide the SDK with your developer API keys. The keys can be ordered f
 
 Note that terms of service apply to any usage of the API, including this SDK.
 
-## Using as a Command-line Tool
+## Using from Command-line
 
 For command-line use, you may prefer installing globally with:
 
@@ -27,7 +27,10 @@ Now try out the command-line tool to do a program search:
 
 	yle-api search Uutiset
 
-If everything went well, a list of results should be returned.
+If everything went well, a list of results should be returned. Now, obtain and use
+ID of any specific result to get more info with:
+
+	yle-api info 1-123456
 
 ## Using as a Node.js/JavaScript Library
 
