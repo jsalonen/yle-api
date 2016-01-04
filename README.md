@@ -12,7 +12,7 @@ You must provide the SDK with your developer API keys. The keys can be ordered f
 
 Note that terms of service apply to any usage of the API, including this SDK.
 
-## Command-line Tools
+## Using Command-line Tools
 
 For command-line use, you may prefer installing globally with:
 
@@ -29,7 +29,7 @@ Now try out the command-line tool:
 
 If everything went well, a list of results should be returned.
 
-### Searching for programing
+### Program search
 
 Refine the search with optional parameters:
 
@@ -39,7 +39,7 @@ For documentation, check help:
 
 	yle-api search --help
 
-## Node.js Library
+## Using as a Node.js/JavaScript Library
 
 Install and add as a dependency:
 
@@ -60,7 +60,4 @@ client.getPrograms({q: 'Uutiset'}, function(err, programs) {
 });
 ```
 
-Check out the source code for methods.
-
-
- 
+Check out the source code for more methods.
