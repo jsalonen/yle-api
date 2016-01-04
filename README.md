@@ -41,7 +41,7 @@ Install and add as a dependency:
 
 Require and create a client instance:
 
-```javascript
+```js
 var yleapi = require('yle-api');
 var client = new yleapi.Client({
   appId: '[YOUR_APP_ID]',
