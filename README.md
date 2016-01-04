@@ -23,21 +23,11 @@ Authorize the command-line tools with your API keys as follows:
 - Copy `.yleapi-EXAMPLE` into your home folder and rename it to `.yleapi`
 - Edit the file to add your own API keys
 
-Now try out the command-line tool:
+Now try out the command-line tool to do a program search:
 
-	yle-api search uutiset
+	yle-api search Uutiset
 
 If everything went well, a list of results should be returned.
-
-### Program search
-
-Refine the search with optional parameters:
-
-    yle-api search uutiset --availability=ondemand --order=publication.starttime:desc
-
-For documentation, check help:
-
-    yle-api search --help
 
 ## Using as a Node.js/JavaScript Library
 
