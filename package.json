@@ -2,7 +2,7 @@
   "name": "yle-api",
   "version": "0.2.1",
   "description": "",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "node node_modules/.bin/jasmine",
     "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine && cat ./coverage/lcov.info | node_modules/.bin/coveralls && rm -rf ./coverage",

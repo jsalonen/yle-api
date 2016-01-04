@@ -2,7 +2,7 @@ var path = require('path');
 var nock = require('nock');
 var URI = require('urijs');
 var querystring = require('querystring');
-var YleApi = require('../../lib/index');
+var Client = require('../../lib/client');
 
 nock.disableNetConnect();
 
@@ -24,7 +24,7 @@ function hasValidCredentials(path) {
     (path.indexOf('app_key=VALID_APP_KEY') > -1);
 };
 
-describe('YleApi', function() {
+describe('Client', function() {
   describe('getPrograms', function() {
     it('should return error with invalid appKey', function(done) {
       nock('https://external.api.yle.fi/v1/')
@@ -34,8 +34,8 @@ describe('YleApi', function() {
           return [401, 'Unauthorized'];
         });
 
-      var yleApi = new YleApi(YLEAPI_PARAMS_INVALID_APPKEY);
-      yleApi.getPrograms({}, function(err, programs) {
+      var client = new Client(YLEAPI_PARAMS_INVALID_APPKEY);
+      client.getPrograms({}, function(err, programs) {
         expect(err).toMatch('401');
         done();
       });
@@ -47,8 +47,8 @@ describe('YleApi', function() {
         .query(true)
         .replyWithFile(200, path.join(__dirname, '../responses/get_programs.json'));
 
-      var yleApi = new YleApi(YLEAPI_PARAMS_VALID);
-      yleApi.getPrograms({}, function(err, programs) {
+      var client = new Client(YLEAPI_PARAMS_VALID);
+      client.getPrograms({}, function(err, programs) {
         expect(err).toBe(null);
         done();
       });

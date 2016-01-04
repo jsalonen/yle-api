@@ -41,9 +41,11 @@ Install and add as a dependency:
 
 Require and create a client instance:
 
-	var YleApi = require('yle-api');
-	var client = new YleApi({appId: '[YOUR_APP_ID]',
-	                         appKey: '[YOUR_APP_KEY]',
-	                         decryptKey: '[YOUR_DECRYPT_KEY]'});
+```javascript
+var yleapi = require('yle-api');
+var client = new yleapi.Client({appId: '[YOUR_APP_ID]',
+                               appKey: '[YOUR_APP_KEY]',
+                               decryptKey: '[YOUR_DECRYPT_KEY]'});
+```
 
 Use the provided methods as you require.
