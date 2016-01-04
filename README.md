@@ -27,8 +27,9 @@ Now try out the command-line tool to do a program search:
 
 	yle-api search Uutiset
 
-If everything went well, a list of results should be returned. Now, obtain and use
-ID of any specific result to get more info with:
+If everything went well, a list of results should be returned.
+
+Now, obtain and use ID of any specific result to get more info with:
 
 	yle-api info 1-123456
 
