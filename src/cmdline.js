@@ -22,6 +22,18 @@ function formattedOutput(data) {
   console.log( JSON.stringify(data, null, 2) );
 }
 
+function withDefaultErrorHandling(cb) {
+  function applyDefaultErrorHandling(err, results) {
+    if(err) {
+      console.error(err);
+    } else {
+      cb(results);
+    }
+  }
+
+  return applyDefaultErrorHandling;
+}
+
 var client = new Client(loadYleApiKeys());
 var program = require('commander');
 
@@ -58,15 +70,19 @@ program
       type: options.type
     };
 
-    client.getPrograms(options, function (err, programs) {
-      var language = options.language || 'fi';
-      var output = programs.map(function(program) {
-        var title = program.title[language];
-        var description = program.description[language] || '';
-        return `[${program.id}] ${title} ${description}`;
-      }).join('\n');
-      console.log(output);
-    });
+    client.getPrograms(options, withDefaultErrorHandling((programs) => {
+      if(!programs || !programs.length) {
+        console.log('No results.');
+      } else {
+        var language = options.language || 'fi';
+        var output = programs.map(function(program) {
+          var title = program.title[language];
+          var description = program.description[language] || '';
+          return `[${program.id}] ${title} ${description}`;
+        }).join('\n');
+        console.log(output);
+      }
+    }));
   }).on('--help', function() {
     console.log('  Examples:');
     console.log();
@@ -75,6 +91,15 @@ program
     console.log('    $ yle-api search --availability=ondemand --order=playcount.24h:desc --mediaobject=video');
     console.log('    $ yle-api search --type=radioclip uutiset 10 20');
     console.log();
+  });
+
+program
+  .command('info [programId]')
+  .description('Obtain additional information about a program')
+  .action(function(programId) {
+    client.getProgram(programId, withDefaultErrorHandling((program) => {
+      console.log(program);
+    }));
   });
 
 program
