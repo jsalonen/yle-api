@@ -2,7 +2,7 @@
 
 var request = require('request');
 var URI = require('urijs');
-var media = require('./media');
+var mediaurl = require('./mediaurl');
 
 const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
@@ -140,7 +140,7 @@ class yleApi {
 
   _decryptPlayouts(playouts) {
     return playouts.map( (playout) => {
-      playout.url = media.decrypt(playout.url, this.decryptKey);
+      playout.url = mediaurl.decrypt(playout.url, this.decryptKey);
       return playout;
     });
   }
