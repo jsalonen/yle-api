@@ -12,7 +12,7 @@ Install the library with:
 
 	npm install yle-api
 
-In order to use Yle API, you must provide it with your developer API keys, which you can order from the developer site at: http://developer.yle.fi/.
+In order to use Yle API, you must provide SDK with your developer API keys. The keys can be ordered from the official developer site at: http://developer.yle.fi/.
 
 Note that terms of service apply to any usage of the API, including this SDK.
 
