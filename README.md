@@ -12,7 +12,7 @@ You must provide the SDK with your developer API keys. The keys can be ordered f
 
 Note that terms of service apply to any usage of the API, including this SDK.
 
-## Command-line Usage
+## Using as a Command-line Tool
 
 For command-line use, you may prefer installing globally with:
 
