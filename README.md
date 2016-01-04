@@ -16,7 +16,7 @@ Note that terms of service apply to any usage of the API, including this SDK.
 
 For command-line use, you may prefer installing globally with:
 
-        npm install -g yle-api
+    npm install -g yle-api
 
 Authorize the command-line tools with your API keys as follows:
 
@@ -33,17 +33,17 @@ If everything went well, a list of results should be returned.
 
 Refine the search with optional parameters:
 
-	yle-api search uutiset --availability=ondemand --order=publication.starttime:desc
+    yle-api search uutiset --availability=ondemand --order=publication.starttime:desc
 
 For documentation, check help:
 
-	yle-api search --help
+    yle-api search --help
 
 ## Using as a Node.js/JavaScript Library
 
 Install and add as a dependency:
 
-	npm install --save yle-api
+    npm install --save yle-api
 
 Simple usage example:
 
