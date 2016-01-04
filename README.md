@@ -4,19 +4,19 @@ Unofficial Node.js SDK for Yle API
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
-## Installing
+## Requirements
 
-Requires: node.js v4.0.0 or later.
+Requires node.js v4.0.0 or later.
 
-Install the library with:
-
-	npm install yle-api
-
-In order to use Yle API, you must provide SDK with your developer API keys. The keys can be ordered from the official developer site at: http://developer.yle.fi/.
+You must provide the SDK with your developer API keys. The keys can be ordered from the official developer site at: http://developer.yle.fi/.
 
 Note that terms of service apply to any usage of the API, including this SDK.
 
-## Using command-line tool
+## Command-line Tools
+
+For command-line use, you may prefer installing globally with:
+
+        npm install -g yle-api
 
 Authorize the command-line tools with your API keys as follows:
 
@@ -27,6 +27,10 @@ Now try out the command-line tool:
 
 	yle-api search uutiset
 
+If everything went well, a list of results should be returned.
+
+### Searching for programing
+
 Refine the search with optional parameters:
 
 	yle-api search uutiset --availability=ondemand --order=publication.starttime:desc
@@ -35,13 +39,13 @@ For documentation, check help:
 
 	yle-api search --help
 
-## Using with node
+## Node.js Library
 
 Install and add as a dependency:
 
 	npm install --save yle-api
 
-Require and create a client instance:
+Simple usage example:
 
 ```js
 var yleapi = require('yle-api');
@@ -50,6 +54,13 @@ var client = new yleapi.Client({
   appKey: '[YOUR_APP_KEY]',
   decryptKey: '[YOUR_DECRYPT_KEY]'
 });
+
+client.getPrograms({q: 'Uutiset'}, function(err, programs) {
+  console.log(programs);
+});
 ```
 
-Use the provided methods as you require.
+Check out the source code for methods.
+
+
+ 
