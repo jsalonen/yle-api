@@ -73,7 +73,6 @@ class Client {
       if(err) {
         return callback(err, null);
       } else {
-        console.log(media);
         const url =
           URI(API_URL)
             .segment('media')

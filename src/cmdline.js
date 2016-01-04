@@ -59,7 +59,13 @@ program
     };
 
     client.getPrograms(options, function (err, programs) {
-      formattedOutput(programs);
+      var language = options.language || 'fi';
+      var output = programs.map(function(program) {
+        var title = program.title[language];
+        var description = program.description[language] || '';
+        return `[${program.id}] ${title} ${description}`;
+      }).join('\n');
+      console.log(output);
     });
   }).on('--help', function() {
     console.log('  Examples:');
