@@ -1,6 +1,6 @@
-import request from 'request'
-import URI from 'urijs'
-import {decrypt} from './mediaurl'
+import request from 'request';
+import URI from 'urijs';
+import {decrypt} from './mediaurl';
 
 const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
@@ -38,8 +38,7 @@ class Client {
           if(response.statusCode != 200) {
             callback(response.statusCode, null);
           } else {
-            var response = JSON.parse(body);
-            callback(null, response.data);
+            callback(null, JSON.parse(body).data);
           }
         }
       });
@@ -62,8 +61,7 @@ class Client {
         if(statusCode != 200) {
           callback(`${statusCode} ${statusMessage}`, null);
         } else {
-          let {apiVersion, meta, data} = JSON.parse(body);
-          callback(null, data);
+          callback(null, JSON.parse(body).data);
         }
       });
   }
@@ -142,6 +140,6 @@ class Client {
       return playout;
     });
   }
-};
+}
 
 module.exports = Client;

@@ -1,10 +1,10 @@
-var fs = require('fs');
-var path = require('path');
-var command = (process.argv.length > 2) ? process.argv[2] : null;
-var Client = require('./client');
+/*eslint no-console: 0*/
+import fs from 'fs'
+import path from 'path'
+import Client from './client'
 
-function getUserHome() {
-  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+function getUserHome () {
+  return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
 }
 
 function loadYleApiKeys() {
@@ -16,7 +16,7 @@ function loadYleApiKeys() {
     console.error(e);
     process.exit(1);
   }
-};
+}
 
 function formattedOutput(data) {
   console.log( JSON.stringify(data, null, 2) );
@@ -52,7 +52,7 @@ program
   .option('-s, --service <value>', 'Filter by service')
   .option('-t, --type <type>', 'Filter by type')
   .action(function(q, limit, offset, options) {
-    var options = {
+    const finalOptions = {
       q: q,
       limit: limit,
       offset: offset,
@@ -70,14 +70,14 @@ program
       type: options.type
     };
 
-    client.getPrograms(options, withDefaultErrorHandling((programs) => {
+    client.getPrograms(finalOptions, withDefaultErrorHandling((programs) => {
       if(!programs || !programs.length) {
         console.log('No results.');
       } else {
-        var language = options.language || 'fi';
+        var language = finalOptions.language || 'fi';
         var output = programs.map(function(program) {
           var title = program.title[language];
-          var description = program.description[language] || '';
+          var description = program.description[language] || '';
           return `[${program.id}] ${title} ${description}`;
         }).join('\n');
         console.log(output);
