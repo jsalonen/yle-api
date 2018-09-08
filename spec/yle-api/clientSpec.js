@@ -42,7 +42,7 @@ describe('Client', function() {
     });
 
     it('should return programs', function(done) {
-      nock('https://external.api.yle.fi/v1')
+      nock('https://external.api.yle.fi/v1/')
         .get('/programs/items.json')
         .query(true)
         .replyWithFile(200, path.join(__dirname, '../responses/get_programs.json'));
