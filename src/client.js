@@ -44,6 +44,30 @@ class Client {
       });
   }
 
+  getProgramsNow (queryOptions, callback) {
+    const url =
+      URI(API_URL)
+        .segment('programs')
+        .segment('schedules')
+        .segment('now')
+        .suffix('json')
+        .query(withCredentials.bind(this, queryOptions))
+        .toString();
+
+    request
+      .get({url}, (err, response, body) => {
+        if(!response) {
+          return callback(`Invalid response`, null);
+        } else {
+          if(response.statusCode != 200) {
+            callback(response.statusCode, null);
+          } else {
+            callback(null, JSON.parse(body).data);
+          }
+        }
+      });
+  }
+
   getProgram (id, callback) {
     const url =
       URI(API_URL)
