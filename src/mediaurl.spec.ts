@@ -37,7 +37,7 @@ describe('mediaurl', () => {
   });
 
   test('any encrypted data can be losslessly decrypted with any valid key and any valid iv', () => {
-    const data = randomBytes(Number(Math.random() * 256 + 1)).toString('hex');
+    const data = randomBytes(256).toString('hex');
     const key = randomBytes(8).toString('hex');
 
     const result  = decrypt(encrypt(data, key), key);
