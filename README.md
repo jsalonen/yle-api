@@ -6,7 +6,7 @@ Unofficial Node.js SDK for Yle API
 
 ## Requirements
 
-Requires node.js v4.0.0 or later.
+Requires node.js v6.x or later.
 
 You must provide the SDK with your developer API keys. The keys can be ordered from the official developer site at: http://developer.yle.fi/.
 
