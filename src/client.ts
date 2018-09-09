@@ -20,9 +20,11 @@ const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 
 class Client {
   apiAuth: IApiAuth;
+  fetcher: typeof fetch;
 
-  constructor(apiAuth: IApiAuth) {    
+  constructor(apiAuth: IApiAuth, fetcher = fetch) {    
     this.apiAuth = apiAuth;
+    this.fetcher = fetch;
   }
 
   _queryParamsWithCredentials(params: object) {
@@ -32,7 +34,7 @@ class Client {
     });
   }
 
-  async fetchPrograms (queryOptions: any): Promise<IApiResponsePrograms> {
+  async fetchPrograms (queryOptions: any = {}): Promise<IApiResponsePrograms> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -41,7 +43,7 @@ class Client {
         .query(this._queryParamsWithCredentials(queryOptions))
         .toString();
 
-    const response = await fetch(url);
+    const response = await this.fetcher(url);
     return await response.json();
   }
   
@@ -55,7 +57,7 @@ class Client {
         .query(this._queryParamsWithCredentials(queryOptions))
         .toString();
 
-    const response = await fetch(url);
+    const response = await this.fetcher(url);
     return await response.json();    
   }
 
@@ -69,7 +71,7 @@ class Client {
         .query(this._queryParamsWithCredentials({}))
         .toString();
 
-    const response = await fetch(url);
+    const response = await this.fetcher(url);
     return await response.json();    
   }
 
@@ -116,7 +118,7 @@ class Client {
         }))
         .toString();
 
-    const response = await fetch(url);
+    const response = await this.fetcher(url);
     return await response.json();
   }
 
