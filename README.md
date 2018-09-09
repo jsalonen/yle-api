@@ -68,7 +68,7 @@ All async methods return promises and can be sugared with async/await:
 
 ```js
 (async function() {
-  const programs = await client.getPrograms({q: 'Uutiset'});
+  const programs = await client.fetchPrograms({q: 'Uutiset'});
   // ...
 })();
 ```
