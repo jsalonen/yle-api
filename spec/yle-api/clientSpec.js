@@ -2,7 +2,7 @@ var path = require('path');
 var nock = require('nock');
 var URI = require('urijs');
 var querystring = require('querystring');
-var Client = require('../../lib/client');
+var Client = require('../../dist/client');
 
 nock.disableNetConnect();
 

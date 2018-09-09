@@ -1,0 +1,478 @@
+{
+    "apiVersion": "1.1.322",
+    "meta": {
+        "id": "1-2074851"
+    },
+    "data": {
+        "description": {
+            "fi": "Nykypäivään sijoittuva musiikkielokuva kertoo ministerin tyttären ja maahanmuutajien pojan rakkaustarinan. R: Elli Vallinoja, Chike Ohanwe, Taneli Mäkelä, Satu Silvo. K: Katja Kallio. O: Neil Hardwick. T: Juonifilmi. (U)",
+            "sv": "Musikfilm om en kärlekshistoria i vår tid mellan en ministerdotter och en pojke med invandrarrötter. S: Elli Vallinoja, Chike Ohanwe, Taneli Mäkelä och Satu Silvo. M: Katja Kallio. R: Neil Hardwick. P: Juonifilmi (R)"
+        },
+        "video": {
+            "language": [],
+            "format": [
+                {
+                    "inScheme": "mediaformat-classification",
+                    "type": "Concept",
+                    "key": "HD"
+                },
+                {
+                    "inScheme": "mediaformat-classification",
+                    "type": "Concept",
+                    "key": "16:9"
+                }
+            ],
+            "type": "VideoTrack"
+        },
+        "typeMedia": "TVContent",
+        "creator": [
+            {
+                "name": "Juonifilmi Oy",
+                "type": "Organization"
+            }
+        ],
+        "indexDataModified": "2018-09-09T20:16:30.181+03:00",
+        "alternativeId": [
+            "16-1-0707127"
+        ],
+        "type": "TVProgram",
+        "duration": "PT1H56M11S",
+        "productionId": "42386301000",
+        "contentRating": {
+            "title": {
+                "fi": "Sallittu yli 12-vuotiaille",
+                "sv": "Förbjudet under 12 år",
+                "en": "Not for persons under 12"
+            },
+            "ageRestriction": 12,
+            "reason": [
+                {
+                    "title": {
+                        "fi": "Sisältää päihteidenkäyttöä",
+                        "sv": "Användning av rusmedel",
+                        "en": "Drugs/intoxicants"
+                    },
+                    "type": "ContentRatingReason",
+                    "key": "drugs-intoxicants"
+                },
+                {
+                    "title": {
+                        "fi": "Voi aiheuttaa ahdistusta",
+                        "sv": "Kan skapa ångest",
+                        "en": "Content may cause anxiety"
+                    },
+                    "type": "ContentRatingReason",
+                    "key": "anxiety"
+                }
+            ],
+            "ratingSystem": "MEKU",
+            "type": "ContentRating"
+        },
+        "title": {
+            "fi": "Jos rakastat",
+            "sv": "Om du älskar"
+        },
+        "itemTitle": {},
+        "countryOfOrigin": [
+            "Suomi"
+        ],
+        "id": "1-2074851",
+        "typeCreative": "Program",
+        "image": {
+            "id": "13-1-2074851-1512377564375",
+            "available": true,
+            "type": "ImageObject",
+            "version": 1536513390
+        },
+        "audio": [
+            {
+                "language": [
+                    "fi"
+                ],
+                "format": [
+                    {
+                        "inScheme": "mediaformat-classification",
+                        "type": "Concept",
+                        "key": "stereo"
+                    }
+                ],
+                "type": "AudioTrack"
+            }
+        ],
+        "originalTitle": {
+            "und": "Jos rakastat"
+        },
+        "publicationEvent": [
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-tv2"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2018-09-29T13:00:23+03:00",
+                "temporalStatus": "in-future",
+                "endTime": "2018-09-29T15:00:00+03:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H59M37S",
+                "region": "Finland",
+                "id": "4-8259136",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "tv-finland"
+                },
+                "publisher": [
+                    {
+                        "id": "tv-finland"
+                    }
+                ],
+                "startTime": "2018-09-09T22:30:00+03:00",
+                "temporalStatus": "currently",
+                "endTime": "2018-09-10T00:34:06+03:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT2H4M6S",
+                "region": "Finland",
+                "id": "4-8265319",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-areena"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2018-09-09T12:45:00+03:00",
+                "temporalStatus": "currently",
+                "endTime": "2018-09-16T23:59:59+03:00",
+                "type": "OnDemandPublication",
+                "duration": "P1WT11H14M59S",
+                "region": "Finland",
+                "id": "4-8258336",
+                "version": 1536513390,
+                "media": {
+                    "id": "29-1_ryux8el9",
+                    "duration": "PT6971S",
+                    "contentProtection": [
+                        {
+                            "id": "22-1",
+                            "type": "ContentProtectionPolicy"
+                        }
+                    ],
+                    "available": true,
+                    "type": "VideoObject",
+                    "downloadable": false,
+                    "version": 1536513390
+                }
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-tv2"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2018-09-09T12:45:00+03:00",
+                "temporalStatus": "in-past",
+                "endTime": "2018-09-09T14:43:33+03:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H58M33S",
+                "region": "Finland",
+                "id": "4-8255328",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "tv-finland"
+                },
+                "publisher": [
+                    {
+                        "id": "tv-finland"
+                    }
+                ],
+                "startTime": "2017-12-09T23:10:00+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2017-12-10T01:06:17+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H56M17S",
+                "region": "Finland",
+                "id": "4-7456710",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-tv2"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2017-12-08T23:15:05+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2017-12-09T01:12:18+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H57M13S",
+                "region": "Finland",
+                "id": "4-7052120",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "tv-finland"
+                },
+                "publisher": [
+                    {
+                        "id": "tv-finland"
+                    }
+                ],
+                "startTime": "2017-12-07T22:05:00+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2017-12-08T00:01:17+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H56M17S",
+                "region": "Finland",
+                "id": "4-7454904",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-tv2"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2017-12-06T21:05:39+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2017-12-06T23:02:38+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H56M59S",
+                "region": "Finland",
+                "id": "4-6869557",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-areena"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2017-12-06T21:05:03+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2017-12-13T23:59:59+02:00",
+                "type": "OnDemandPublication",
+                "duration": "P1WT2H54M56S",
+                "region": "Finland",
+                "id": "4-6994741",
+                "version": 1536513390,
+                "media": {
+                    "id": "29-1_ofx9vxji",
+                    "duration": "PT6971S",
+                    "contentProtection": [
+                        {
+                            "id": "22-1",
+                            "type": "ContentProtectionPolicy"
+                        }
+                    ],
+                    "available": false,
+                    "type": "VideoObject",
+                    "downloadable": false,
+                    "version": 1536513390
+                }
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "tv-finland"
+                },
+                "publisher": [
+                    {
+                        "id": "tv-finland"
+                    }
+                ],
+                "startTime": "2013-12-07T22:24:00+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2013-12-08T00:21:00+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H57M",
+                "region": "Finland",
+                "id": "4-3149613",
+                "version": 1536513390
+            },
+            {
+                "tags": {
+                    "catalog": false
+                },
+                "service": {
+                    "id": "yle-tv2"
+                },
+                "publisher": [
+                    {
+                        "id": "yle-tv2"
+                    }
+                ],
+                "startTime": "2013-12-06T14:30:02+02:00",
+                "temporalStatus": "in-past",
+                "endTime": "2013-12-06T16:30:00+02:00",
+                "type": "ScheduledTransmission",
+                "duration": "PT1H59M58S",
+                "region": "Finland",
+                "id": "4-3103808",
+                "version": 1536513390
+            }
+        ],
+        "collection": "main",
+        "subject": [
+            {
+                "id": "21-8",
+                "title": {
+                    "fi": "Kotimaiset elokuvat",
+                    "en": "Domestic Movies"
+                },
+                "inScheme": "finnpanel-genre-classification",
+                "type": "Concept",
+                "notation": [
+                    {
+                        "value": "7.1",
+                        "valueType": "finnpanel-notation"
+                    }
+                ]
+            },
+            {
+                "id": "31-1-8",
+                "title": {
+                    "fi": "Draama"
+                },
+                "inScheme": "yle-content-main-classification",
+                "type": "Concept"
+            },
+            {
+                "id": "31-2-8.14",
+                "title": {
+                    "fi": "(Elokuvateatteri)elokuva"
+                },
+                "inScheme": "yle-content-format-classification",
+                "type": "Concept"
+            },
+            {
+                "id": "31-3-8.70",
+                "title": {
+                    "fi": "Komedia, huumori"
+                },
+                "inScheme": "yle-content-topic-classification",
+                "type": "Concept"
+            },
+            {
+                "id": "5-131",
+                "title": {
+                    "fi": "Sarjat ja elokuvat",
+                    "sv": "Serier och film"
+                },
+                "broader": {
+                    "id": "5-130"
+                },
+                "inScheme": "areena-content-classification",
+                "type": "Concept",
+                "key": "sarjatjaelokuvat"
+            },
+            {
+                "id": "5-135",
+                "title": {
+                    "fi": "Elokuvat",
+                    "sv": "Filmer"
+                },
+                "broader": {
+                    "id": "5-131"
+                },
+                "inScheme": "areena-content-classification",
+                "type": "Concept",
+                "key": "elokuvat"
+            },
+            {
+                "id": "5-136",
+                "title": {
+                    "fi": "Komedia",
+                    "sv": "Komedi"
+                },
+                "broader": {
+                    "id": "5-131"
+                },
+                "inScheme": "areena-content-classification",
+                "type": "Concept",
+                "key": "komedia"
+            },
+            {
+                "id": "5-142",
+                "title": {
+                    "fi": "Huumori",
+                    "sv": "Humor"
+                },
+                "broader": {
+                    "id": "5-139"
+                },
+                "inScheme": "areena-content-classification",
+                "type": "Concept",
+                "key": "huumori"
+            },
+            {
+                "id": "5-262",
+                "title": {
+                    "fi": "Draama"
+                },
+                "inScheme": "areena-analytics-classification",
+                "type": "Concept",
+                "key": "draama"
+            }
+        ],
+        "subtitling": [
+            {
+                "language": [
+                    "fi"
+                ],
+                "type": "HardOfHearingSubtitling"
+            }
+        ]
+    }
+}
