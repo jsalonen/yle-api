@@ -11,6 +11,8 @@ export interface CloudinaryImageTransformations {
   crop?: 'fit' | 'fill' | 'limit' | null;
 }
 
+export type CloudinaryImageFormat = 'jpg' | 'png' | 'gif';
+
 export function makeImageTransformationString(transformations: CloudinaryImageTransformations) {
   let commands = [];
   const {width, height, crop} = transformations;

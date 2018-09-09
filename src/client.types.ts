@@ -31,7 +31,24 @@ export interface IProgramImage {
   version: number;
 }
 
-export interface IApiResponseProgramData {
+type PublicationEventType = 'ScheduledTransmission' | 'OnDemandPublication';
+type PublicationEventTemporalStatus = 'currently' | 'in-future';
+
+export interface ProgramPublicationEvent {
+  tags: object; // TODO: add exact typing
+  service: object; // TODO: add exact typing
+  publisher: object; // TODO: add exact typing
+  startTime: string;
+  temporalStatus: PublicationEventTemporalStatus;
+  endTime: string;
+  type: PublicationEventType;
+  duration: string;
+  region: 'Finland' | string; // TODO: add missing string values
+  id: string;
+  version: number;
+}
+
+export interface Program {
   description: ILocalizedField;
   video: any; // TODO: add exact typing
   typeMedia: string;
@@ -50,12 +67,14 @@ export interface IApiResponseProgramData {
   image: IProgramImage;
   audio: any[]; // TODO: add exact typing
   originalTitle: object; // TODO: add exact typing
-  publicationEvent: any[]; // TODO: add exact typing
+  publicationEvent: ProgramPublicationEvent[];
   collection: string;
   subject: object[]; // TODO: add exact typing
   subtitling: object[]; // TODO: add exact typing
 }
 
 export interface IApiResponseProgram extends IApiResponse {
-  data: IApiResponseProgramData;
+  data: Program;
 }
+
+export type PlayoutProtocol = 'HLS' | 'HDS';

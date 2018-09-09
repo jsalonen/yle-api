@@ -1,14 +1,21 @@
 import fetch from 'node-fetch';
 import URI from 'urijs';
 import { decrypt } from './mediaurl';
-import { IApiAuth, IApiResponse, IApiResponseProgram } from './client.types';
-import { makeImageTransformationString, CloudinaryImageTransformations } from './cloudinary';
+import {
+  IApiAuth,
+  IApiResponse,
+  IApiResponseProgram,
+  Program,
+  ProgramPublicationEvent,
+  PlayoutProtocol
+} from './client.types';
+import {
+  makeImageTransformationString,
+  CloudinaryImageTransformations,
+  CloudinaryImageFormat
+} from './cloudinary';
 const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
-const EVENT_TEMPORAL_STATUS_CURRENTLY = 'currently';
-const EVENT_TYPE_ONDEMAND_PUBLICATION = 'OnDemandPublication';
-
-type ImageFormat = 'jpg' | 'png' | 'gif';
 
 class Client {
   apiAuth: IApiAuth;
@@ -24,7 +31,7 @@ class Client {
     });
   }
 
-  async getPrograms (queryOptions: any): Promise<IApiResponse> {
+  async fetchPrograms (queryOptions: any): Promise<IApiResponse> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -37,7 +44,7 @@ class Client {
     return await response.json();
   }
   
-  async getProgramsNow (queryOptions: any): Promise<IApiResponse> {
+  async fetchProgramsNow (queryOptions: any): Promise<IApiResponse> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -51,7 +58,7 @@ class Client {
     return await response.json();    
   }
 
-  async getProgram (id: string): Promise<IApiResponseProgram> {
+  async fetchProgram (id: string): Promise<IApiResponseProgram> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -65,11 +72,11 @@ class Client {
     return await response.json();    
   }
 
-  async getImageUrl(
+  getImageUrl(
     programImageId: string,
-    format: ImageFormat = 'jpg',
+    format: CloudinaryImageFormat = 'jpg',
     transformations?: CloudinaryImageTransformations | null
-  ): Promise<string> {
+  ): string {
     let url = URI(IMAGES_URL);
     if(transformations) {
       url = url.segment(makeImageTransformationString(transformations));
@@ -83,64 +90,44 @@ class Client {
     );
   }
 
-  /*
-  async getProgramStream(id: string, protocol: string) {
-    this._findPlayableMedia(programId, (err, media) => {
-      if(err) {
-        return callback(err, null);
-      } else {
-        const url =
-          URI(API_URL)
-            .segment('media')
-            .segment('playouts')
-            .suffix('json')
-            .query(this._withCredentials({
-               program_id: programId,
-               media_id: media.id,
-               protocol: protocol
-            }))
-            .toString();
-
-        request
-          .get({url}, (err, response, body) => {
-            let {statusCode, statusMessage} = response;
-
-            if(err || statusCode != 200) {
-              callback(`${statusCode} ${statusMessage}`, null);
-            } else {
-              let playouts =
-                this._decryptPlayouts( JSON.parse(body).data );
-              callback(null, playouts);
-            }
-          });
-      }
-    });
+  findPlayablePublicationsByProgram(program: Program): ProgramPublicationEvent[] {
+    return (
+      program.publicationEvent.filter((event) => {
+        return(event.temporalStatus === 'currently' && event.type === 'OnDemandPublication');
+      })
+    )
   }
 
-  _findPlayableMedia(id, callback) {
-    this.getProgram(id, (err, program) => {
-      if(program && program.publicationEvent !== undefined) {
-        for (let event of program.publicationEvent) {
-          if(event.temporalStatus === EVENT_TEMPORAL_STATUS_CURRENTLY &&
-             event.type === EVENT_TYPE_ONDEMAND_PUBLICATION) {
-            return callback(null, event.media);
-          }
-        }
+  async fetchPlayouts(
+    programId: string,
+    mediaId: string,
+    protocol: PlayoutProtocol,
+    decrypt = true
+  ) {
+    const url =
+      URI(API_URL)
+        .segment('media')
+        .segment('playouts')
+        .suffix('json')
+        .query(this._queryParamsWithCredentials({
+          program_id: programId,
+          media_id: mediaId,
+          protocol: protocol
+        }))
+        .toString();
 
-        callback(err, null);
-      } else {
-        callback('No matches', null);
-      }
-    });
+    const response = await fetch(url);
+    return await response.json();
   }
 
-  _decryptPlayouts(playouts) {
-    return playouts.map( (playout) => {
-      playout.url = decrypt(playout.url, this.decryptKey);
-      return playout;
-    });
+  decryptMediaUrl(url: string): string {
+    const key = this.apiAuth.decryptKey;
+    if(!key) {
+      throw Error("Media decryption key required for decrypting media URLs");
+    } else {
+      return decrypt(url, key);
+    }
   }
-  */
 }
 
 export default Client;
