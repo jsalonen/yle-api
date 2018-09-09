@@ -15,6 +15,7 @@ import {
   CloudinaryImageTransformations,
   CloudinaryImageFormat
 } from './cloudinary';
+
 const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 
