@@ -113,8 +113,10 @@ program
     });
   });
 
-if(process.argv.length === 2) {
-  program.outputHelp();
-} else {
-  program.parse(process.argv);
+program.parse(process.argv);
+
+const NO_COMMAND_SPECIFIED = program.args.length === 0;
+
+if(NO_COMMAND_SPECIFIED) {
+  program.help();
 }
