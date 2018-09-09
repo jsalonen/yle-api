@@ -1,13 +1,12 @@
 {
   "name": "yle-api",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/types.d.ts",
   "scripts": {
-    "lint": "eslint src",
-    "test": "jasmine",
-    "install": "babel src --out-dir lib",
-    "watch": "babel --watch src --out-dir lib"
+    "build": "tsc",
+    "test": "jest"
   },
   "bin": {
     "yle-api": "./bin/yle-api"
@@ -19,18 +18,17 @@
   },
   "license": "ISC",
   "dependencies": {
-    "babel-preset-node6": "^11.0.0",
     "commander": "^2.9.0",
-    "request": "^2.88.0",
+    "node-fetch": "^2.2.0",
     "urijs": "^1.19.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.5.0",
-    "eslint-config-standard": "^4.4.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "jasmine": "^2.4.1",
-    "nock": "^9.6.1"
+    "@types/jest": "^23.3.2",
+    "@types/node": "^10.9.4",
+    "@types/node-fetch": "^2.1.2",
+    "@types/urijs": "^1.15.38",
+    "jest": "^23.5.0",
+    "ts-jest": "^23.1.4",
+    "typescript": "^3.0.3"
   }
 }

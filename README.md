@@ -1,6 +1,13 @@
 # yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api)
 
-Unofficial Node.js SDK for Yle API
+Unofficial Yle API SDK for Node.js
+
+Features:
+
+- Promise-based with async/await support
+- TypeScript support
+- Minimal dependencies
+- Decent test coverage for critical parts
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
@@ -42,16 +49,35 @@ Install and add as a dependency:
 Simple usage example:
 
 ```js
-var yleapi = require('yle-api');
-var client = new yleapi.Client({
+const yleapi = require('yle-api');
+const client = new yleapi.Client({
   appId: '[YOUR_APP_ID]',
   appKey: '[YOUR_APP_KEY]',
   decryptKey: '[YOUR_DECRYPT_KEY]'
 });
 
-client.getPrograms({q: 'Uutiset'}, function(err, programs) {
-  console.log(programs);
-});
+client
+  .fetchPrograms({q: 'Uutiset'})
+  .then(response => {
+    const programs = response.data;
+    console.log(programs);
+  });
 ```
 
-Check out the source code for more methods.
+All async methods return promises and can be sugared with async/await:
+
+```js
+(async function() {
+  const programs = await client.fetchPrograms({q: 'Uutiset'});
+  // ...
+})();
+```
+
+The library has full TypeScript support. Enable typings support by using TypeScript important syntax:
+
+```ts
+import { Client } from 'yle-api';
+```
+
+TypeScript typings may not be completely accurate. Please, feel free to open a Pull Request if you
+require a fix to build-in typings.

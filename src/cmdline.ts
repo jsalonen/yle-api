@@ -3,8 +3,13 @@ import fs from 'fs'
 import path from 'path'
 import Client from './client'
 
-function getUserHome () {
-  return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+function getUserHome(): string {
+  const userHome = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+  if(!userHome) {
+    throw Error('Could not detect home directory');
+  } else {
+    return userHome;
+  }
 }
 
 function loadYleApiKeys() {
@@ -18,24 +23,12 @@ function loadYleApiKeys() {
   }
 }
 
-function formattedOutput(data) {
+function formattedOutput(data: any) {
   console.log( JSON.stringify(data, null, 2) );
 }
 
-function withDefaultErrorHandling(cb) {
-  function applyDefaultErrorHandling(err, results) {
-    if(err) {
-      console.error(err);
-    } else {
-      cb(results);
-    }
-  }
-
-  return applyDefaultErrorHandling;
-}
-
-var client = new Client(loadYleApiKeys());
-var program = require('commander');
+const client = new Client(loadYleApiKeys());
+const program = require('commander');
 
 program
   .command('search [query] [limit] [offset]')
@@ -51,7 +44,7 @@ program
   .option('-sr, --series <value>', 'Return items containing specific series')
   .option('-s, --service <value>', 'Filter by service')
   .option('-t, --type <type>', 'Filter by type')
-  .action(function(q, limit, offset, options) {
+  .action(async (q: string, limit: string, offset: string, options: any) => {
     const finalOptions = {
       q: q,
       limit: limit,
@@ -70,19 +63,19 @@ program
       type: options.type
     };
 
-    client.getPrograms(finalOptions, withDefaultErrorHandling((programs) => {
-      if(!programs || !programs.length) {
-        console.log('No results.');
-      } else {
-        var language = finalOptions.language || 'fi';
-        var output = programs.map(function(program) {
-          var title = program.title[language];
-          var description = program.description[language] || '';
-          return `[${program.id}] ${title} ${description}`;
-        }).join('\n');
-        console.log(output);
-      }
-    }));
+    const response = await client.fetchPrograms(finalOptions);
+    if(!response.meta.count) {
+      console.log('No results.');
+    } else {
+      const programs = response.data;
+      const language = finalOptions.language || 'fi';
+      const output = programs.map(program => {
+        const title = program.title[language];
+        const description = program.description[language] || '';
+        return `[${program.id}] ${title} ${description}`;
+      }).join('\n');
+      console.log(output);
+    }
   }).on('--help', function() {
     console.log('  Examples:');
     console.log();
@@ -96,21 +89,25 @@ program
 program
   .command('info [programId]')
   .description('Obtain additional information about a program')
-  .action(function(programId) {
-    client.getProgram(programId, withDefaultErrorHandling((program) => {
-      console.log(program);
-    }));
+  .action(async (programId: string) => {
+    const response = await client.fetchProgram(programId);
+    console.log(formattedOutput(response.data));
   });
 
 program
-  .command('get-stream <programId> [protocol]')
+  .command('get-stream <programId>')
   .description('Retrieve stream for a program')
-  .option('-ml, --multibitrate <true|false>', '')
-  .option('-hs, --hardsubtitles <true|false>', 'Burn subtitles into stream')
-  .action(function(programId, protocol) {
-    client.getProgramStream(programId, protocol || 'HDS', function (err, stream) {
-      formattedOutput(stream);
-    });
+  .option('-p, --protocol <protocol>', 'Specify protocol for returned stream. Values: HLS (default), HDS, PMD, RTMPE')
+  .action(async (programId: string, options: any) => {
+    const response = await client.fetchProgram(programId);
+    const playables = client.findPlayablePublicationsByProgram(response.data);
+    const playoutResponse = await client.fetchPlayouts(
+      programId,
+      playables[0].media.id,
+      options.protocol || 'HLS'
+    );
+    const url = client.decryptMediaUrl(playoutResponse.data[0].url);
+    console.log(url);
   });
 
 program.parse(process.argv);
