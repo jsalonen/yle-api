@@ -18,10 +18,8 @@ export interface IApiResponse {
   data: any;
 }
 
-export interface ILocalizedField {
-  fi?: string;
-  en?: string;
-  sv?: string;
+export interface LocalizedField {
+  [key: string]: string;
 }
 
 export interface IProgramImage {
@@ -45,11 +43,12 @@ export interface ProgramPublicationEvent {
   duration: string;
   region: 'Finland' | string; // TODO: add missing string values
   id: string;
+  media: any; // TODO: add exact typing
   version: number;
 }
 
 export interface Program {
-  description: ILocalizedField;
+  description: LocalizedField;
   video: any; // TODO: add exact typing
   typeMedia: string;
   creator: any; // TODO: add exact typing
@@ -59,7 +58,7 @@ export interface Program {
   duration: string;
   productionId: string;
   contentRating: any; // TODO: add exact typing
-  title: ILocalizedField;
+  title: LocalizedField;
   itemTitle: any; // TODO: add exact typing
   countryOfOrigin: string[];
   id: string;
@@ -77,4 +76,8 @@ export interface IApiResponseProgram extends IApiResponse {
   data: Program;
 }
 
-export type PlayoutProtocol = 'HLS' | 'HDS';
+export interface IApiResponsePrograms extends IApiResponse {
+  data: Program[];
+}
+
+export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE';

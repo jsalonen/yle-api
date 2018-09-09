@@ -5,6 +5,7 @@ import {
   IApiAuth,
   IApiResponse,
   IApiResponseProgram,
+  IApiResponsePrograms,
   Program,
   ProgramPublicationEvent,
   PlayoutProtocol
@@ -31,7 +32,7 @@ class Client {
     });
   }
 
-  async fetchPrograms (queryOptions: any): Promise<IApiResponse> {
+  async fetchPrograms (queryOptions: any): Promise<IApiResponsePrograms> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -101,8 +102,7 @@ class Client {
   async fetchPlayouts(
     programId: string,
     mediaId: string,
-    protocol: PlayoutProtocol,
-    decrypt = true
+    protocol: PlayoutProtocol
   ) {
     const url =
       URI(API_URL)
