@@ -1,5 +1,5 @@
-# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api)
-
+# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/github/jsalonen/yle-api/badge.svg?branch=master)](https://coveralls.io/github/jsalonen/yle-api?branch=master)
+ 
 Unofficial Yle API SDK for Node.js
 
 Features:
