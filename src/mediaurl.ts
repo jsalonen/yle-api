@@ -1,20 +1,24 @@
 import {createCipheriv, createDecipheriv, randomBytes} from 'crypto'
 
 const ALGORITHM = 'aes-128-cbc';
+const IV_LENGTH = 16;
 
 export function decrypt(encryptedData: string, encryptKey: string) {
   const encryptedBuffer = Buffer.from(encryptedData, 'base64').toString('hex');
-  const iv = Buffer.alloc(16, encryptedBuffer.substr(0, 32), 'hex');
-  const payload = Buffer.from(encryptedBuffer.substr(32), 'hex');  
+  const iv = Buffer.alloc(IV_LENGTH, encryptedBuffer.substr(0, IV_LENGTH * 2), 'hex');
+  const payload = Buffer.from(encryptedBuffer.substr(IV_LENGTH * 2), 'hex');  
   const decipher = createDecipheriv(ALGORITHM, encryptKey, iv);
 
-  const decrypted = decipher.update(payload).toString() + decipher.final().toString();
+  const decrypted = Buffer.concat([
+    decipher.update(payload),
+    decipher.final()
+  ]);
 
-  return decrypted;
+  return decrypted.toString();
 }
 
 export function encrypt(mediaUrl: string, decryptKey: string, iv?: string) {
-  const ivHex = iv ? Buffer.from(iv, 'hex') : randomBytes(16);
+  const ivHex = iv ? Buffer.from(iv, 'hex') : randomBytes(IV_LENGTH);
   const encipher = createCipheriv(ALGORITHM, decryptKey, ivHex);
 
   const encrypted = Buffer.concat([
