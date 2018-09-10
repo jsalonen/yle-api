@@ -6,7 +6,8 @@
   "types": "./dist/types.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "bin": {
     "yle-api": "./bin/yle-api"
@@ -27,6 +28,7 @@
     "@types/node": "^10.9.4",
     "@types/node-fetch": "^2.1.2",
     "@types/urijs": "^1.15.38",
+    "coveralls": "^3.0.2",
     "jest": "^23.5.0",
     "ts-jest": "^23.1.4",
     "typescript": "^3.0.3"
