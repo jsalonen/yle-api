@@ -2,10 +2,10 @@ import fetch from 'node-fetch';
 import URI from 'urijs';
 import { decrypt } from './mediaurl';
 import {
-  IApiAuth,
-  IApiResponse,
-  IApiResponseProgram,
-  IApiResponsePrograms,
+  ApiAuth,
+  ApiResponse,
+  ApiResponseProgram,
+  ApiResponsePrograms,
   Program,
   ProgramPublicationEvent,
   PlayoutProtocol
@@ -20,10 +20,10 @@ const API_URL = 'https://external.api.yle.fi/v1/';
 const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 
 class Client {
-  apiAuth: IApiAuth;
+  apiAuth: ApiAuth;
   fetcher: typeof fetch;
 
-  constructor(apiAuth: IApiAuth, fetcher = fetch) {    
+  constructor(apiAuth: ApiAuth, fetcher = fetch) {    
     this.apiAuth = apiAuth;
     this.fetcher = fetch;
   }
@@ -35,7 +35,7 @@ class Client {
     });
   }
 
-  async fetchPrograms (queryOptions: any = {}): Promise<IApiResponsePrograms> {
+  async fetchPrograms (queryOptions: any = {}): Promise<ApiResponsePrograms> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -48,7 +48,7 @@ class Client {
     return await response.json();
   }
   
-  async fetchProgramsNow (queryOptions: any): Promise<IApiResponse> {
+  async fetchProgramsNow (queryOptions: any): Promise<ApiResponse> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -62,7 +62,7 @@ class Client {
     return await response.json();    
   }
 
-  async fetchProgram (id: string): Promise<IApiResponseProgram> {
+  async fetchProgram (id: string): Promise<ApiResponseProgram> {
     const url =
       URI(API_URL)
         .segment('programs')
@@ -79,7 +79,7 @@ class Client {
   getImageUrl(
     programImageId: string,
     format: CloudinaryImageFormat = 'jpg',
-    transformations?: CloudinaryImageTransformations | null
+    transformations?: CloudinaryImageTransformations
   ): string {
     let url = URI(IMAGES_URL);
     if(transformations) {

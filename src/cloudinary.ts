@@ -8,7 +8,7 @@
 export interface CloudinaryImageTransformations {
   width?: number;
   height?: number;
-  crop?: 'fit' | 'fill' | 'limit' | null;
+  crop?: 'fit' | 'fill' | 'limit';
 }
 
 export type CloudinaryImageFormat = 'jpg' | 'png' | 'gif';

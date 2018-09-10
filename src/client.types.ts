@@ -1,10 +1,10 @@
-export interface IApiAuth {
+export interface ApiAuth {
   appId: string;
   appKey: string;
-  decryptKey?: string | null;
+  decryptKey?: string;
 }
 
-export interface IApiResponseMetadata {
+export interface ApiResponseMetadata {
   offset: string;
   limit: string;
   count: number;
@@ -12,9 +12,9 @@ export interface IApiResponseMetadata {
   clip: number;
 }
 
-export interface IApiResponse {
+export interface ApiResponse {
   apiVersion: string;
-  meta: IApiResponseMetadata;
+  meta: ApiResponseMetadata;
   data: any;
 }
 
@@ -22,7 +22,7 @@ export interface LocalizedField {
   [key: string]: string;
 }
 
-export interface IProgramImage {
+export interface ProgramImage {
   id: string;
   available: boolean;
   type: string;
@@ -63,7 +63,7 @@ export interface Program {
   countryOfOrigin: string[];
   id: string;
   typeCreative: string;
-  image: IProgramImage;
+  image: ProgramImage;
   audio: any[]; // TODO: add exact typing
   originalTitle: object; // TODO: add exact typing
   publicationEvent: ProgramPublicationEvent[];
@@ -72,11 +72,11 @@ export interface Program {
   subtitling: object[]; // TODO: add exact typing
 }
 
-export interface IApiResponseProgram extends IApiResponse {
+export interface ApiResponseProgram extends ApiResponse {
   data: Program;
 }
 
-export interface IApiResponsePrograms extends IApiResponse {
+export interface ApiResponsePrograms extends ApiResponse {
   data: Program[];
 }
 
