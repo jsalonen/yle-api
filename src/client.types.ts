@@ -72,12 +72,29 @@ export interface Program {
   subtitling: object[]; // TODO: add exact typing
 }
 
+export interface MediaPlayout {
+  subtitles: any;
+  protocol: PlayoutProtocol;
+  multibitrate: boolean;
+  formatOf: string;
+  width: number;
+  height: number;
+  type: string; // TODO: add exact typing
+  url: string;
+  live: boolean;
+  protectionType: string; // TODO: add exact typing
+}
+
 export interface ApiResponseProgram extends ApiResponse {
   data: Program;
 }
 
 export interface ApiResponsePrograms extends ApiResponse {
   data: Program[];
+}
+
+export interface ApiResponseMediaPlayouts extends ApiResponse {
+  data: MediaPlayout[];
 }
 
 export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE';

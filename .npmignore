@@ -3,3 +3,7 @@ coverage
 npm-debug.log
 .DS_Store
 .yleapi
+test
+src/__mocks__
+src/**/*.spec.*
+src/**/*.test.*
