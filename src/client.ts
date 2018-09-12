@@ -164,15 +164,6 @@ class Client {
       .retrieveJSONOrError(response)
       .then(maybeDecryptMediaUrls);
   }
-
-  decryptMediaUrl(url: string): string {
-    const key = this.apiAuth.decryptKey;
-    if(!key) {
-      throw Error("Media decryption key required for decrypting media URLs");
-    } else {
-      return decrypt(url, key);
-    }
-  }
 }
 
 export default Client;
