@@ -13,7 +13,7 @@ Features:
 
 ## Requirements
 
-Requires node.js v6.x or later.
+Requires node.js v8.x or later.
 
 You must provide the SDK with your developer API keys. The keys can be ordered from the official developer site at: http://developer.yle.fi/.
 
