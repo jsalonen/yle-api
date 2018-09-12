@@ -106,8 +106,7 @@ program
       playables[0].media.id,
       options.protocol || 'HLS'
     );
-    const url = client.decryptMediaUrl(playoutResponse.data[0].url);
-    console.log(url);
+    console.log(playoutResponse.data[0].url);
   });
 
 program.parse(process.argv);
