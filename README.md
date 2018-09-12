@@ -6,8 +6,8 @@ Features:
 
 - Promise-based with async/await support
 - TypeScript support
+- Good test coverage
 - Minimal dependencies
-- Decent test coverage for critical parts
 
 **Work in progress. All contributions (pull requests, issues, comments) welcome!**
 
