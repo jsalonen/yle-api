@@ -19,7 +19,7 @@ import {
 import { Response } from 'node-fetch';
 
 const API_URL = 'https://external.api.yle.fi/v1/';
-const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
+export const IMAGES_URL = 'http://images.cdn.yle.fi/image/upload/';
 
 class Client {
   apiAuth: ApiAuth;

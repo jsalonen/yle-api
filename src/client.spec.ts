@@ -1,4 +1,4 @@
-import Client from './client';
+import Client, { IMAGES_URL } from './client';
 import { ApiAuth } from './client.types';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -149,4 +149,15 @@ describe('Client', () => {
       await expect(request).rejects.toEqual('Unauthorized');;
     });
   });
+
+  test('getImageUrl', () => {
+    const client = makeClient();
+    const url = client.getImageUrl('image1', 'jpg', {
+      width: 1920,
+      height: 1080,
+      crop: 'fit'
+    });
+
+    expect(url).toMatch(`${IMAGES_URL}w_1920,h_1080,c_fit/image1.jpg`);
+  })
 });
