@@ -5,6 +5,7 @@ import {
   ApiAuth,
   ApiResponse,
   ApiResponseProgram,
+  ApiRequestPrograms,
   ApiResponsePrograms,
   ApiResponseMediaPlayouts,
   Program,
@@ -45,7 +46,7 @@ class Client {
     }
   }
 
-  async fetchPrograms (queryOptions: any = {}): Promise<ApiResponsePrograms> {
+  async fetchPrograms (queryOptions: ApiRequestPrograms = {}): Promise<ApiResponsePrograms> {
     const url =
       URI(API_URL)
         .segment('programs')

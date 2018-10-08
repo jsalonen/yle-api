@@ -93,8 +93,43 @@ export interface ApiResponsePrograms extends ApiResponse {
   data: Program[];
 }
 
+export interface ApiRequestPrograms {
+  id?: string; // Multiple IDs can be passed as a comma separated list.
+  type?: 'program' | 'clip' | 'tvcontent' | 'tvprogram' | 'tvclip' | 'radiocontent' | 'radioprogram' | 'radioclip';
+  q?: string;
+  mediaobject?: 'audio' | 'video';
+  category?: string; // Multiple IDs can be passed as a comma separated list.
+  series?: string; // Multiple IDs can be passed as a comma separated list.
+  availability?: 'ondemand' | 'future-ondemand' | 'future-scheduled' | 'in-future';
+  downloadable?: 'true' | undefined;
+  language?: 'fi' | 'sv';
+  region?: 'fi' | 'world';
+  service?: string;
+  publisher?: string;
+  contentprotection?: string; // Multiple IDs can be passed as a comma separated list.
+  order?: Order;
+  limit?: number;
+  offset?: number;
+}
+
 export interface ApiResponseMediaPlayouts extends ApiResponse {
   data: MediaPlayout[];
 }
 
 export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE';
+
+export type Order =
+  'playcount.6h:asc' |
+  'playcount.6h:desc' |
+  'playcount.24h:asc' |
+  'playcount.24h:desc' |
+  'playcount.week:asc' |
+  'playcount.week:desc' |
+  'playcount.month:asc' |
+  'playcount.month:desc' |
+  'publication.starttime:asc' |
+  'publication.starttime:desc' |
+  'publication.endtime:asc' |
+  'publication.endtime:desc' |
+  'updated:asc' |
+  'updated:desc';
