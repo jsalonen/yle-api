@@ -44,7 +44,7 @@ program
   .option('-sr, --series <value>', 'Return items containing specific series')
   .option('-s, --service <value>', 'Filter by service')
   .option('-t, --type <type>', 'Filter by type')
-  .action(async (q: string, limit: string, offset: string, options: any) => {
+  .action(async (q: string, limit: number, offset: number, options: any) => {
     const finalOptions = {
       q: q,
       limit: limit,
@@ -69,7 +69,7 @@ program
     } else {
       const programs = response.data;
       const language = finalOptions.language || 'fi';
-      const output = programs.map(program => {
+      const output = programs.map((program: any) => {
         const title = program.title[language];
         const description = program.description[language] || '';
         return `[${program.id}] ${title} ${description}`;
