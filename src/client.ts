@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import URI from 'urijs';
 import { decrypt } from './mediaurl';
 import {
@@ -18,7 +17,7 @@ import {
   CloudinaryImageTransformations,
   CloudinaryImageFormat
 } from './cloudinary';
-import { Response } from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 
 const API_URL = 'https://external.api.yle.fi/v1/';
 export const IMAGES_URL = 'https://images.cdn.yle.fi/image/upload/';
@@ -112,6 +111,23 @@ class Client {
         return(event.temporalStatus === 'currently' && event.type === 'OnDemandPublication');
       })
     )
+  }
+
+  async trackStreamStart(programId: string, mediaId: string): Promise<void> {
+    const url =
+      URI(API_URL)
+        .segment('tracking')
+        .segment('streamstart')
+        .query(this.queryParamsWithCredentials({
+          program_id: programId,
+          media_id: mediaId
+        }))
+        .toString();
+
+    const response = await this.fetcher(url);
+    if(!response.ok) {
+      return Promise.reject(`Track stream failed: ${response.status} ${response.statusText}`);
+    }
   }
 
   private decryptMediaUrls(playouts: ApiResponseMediaPlayouts, decryptKey: string) {
