@@ -161,3 +161,28 @@ describe('Client', () => {
     expect(url).toMatch(`${IMAGES_URL}w_1920,h_1080,c_fit/image1.jpg`);
   })
 });
+
+describe('trackStreamStart', () => {
+  afterEach(fetchMock.restore);
+
+  test('returns 200 OK on successful track event registration', async () => {
+    fetchMock.once('*', {
+      status: 200,
+      body: ''
+    });
+
+    const client = makeClient(VALID_APIKEYS);
+    await client.trackStreamStart('valid-program-id', 'valid-media-id');
+  });
+
+  test('returns 400 Bad Request with invalid or missing parameters', async () => {
+    fetchMock.once('*', {
+      status: 400,
+      body: 'Bad Request'
+    });
+
+    const client = makeClient(VALID_APIKEYS);
+    const trackStreamStart = client.trackStreamStart('valid-program-id', '');
+    await expect(trackStreamStart).rejects.toEqual('Track stream failed: 400 Bad Request')
+  });
+});
