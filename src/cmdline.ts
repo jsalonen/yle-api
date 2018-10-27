@@ -103,7 +103,7 @@ program
     const playables = client.findPlayablePublicationsByProgram(response.data);
     const playoutResponse = await client.fetchPlayouts(
       programId,
-      playables[0].media.id,
+      playables[0].media!.id, // TODO: add error checking
       options.protocol || 'HLS'
     );
     console.log(playoutResponse.data[0].url);

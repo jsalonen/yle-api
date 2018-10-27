@@ -3,7 +3,7 @@ import { ApiAuth } from './client.types';
 import * as fs from 'fs';
 import * as path from 'path';
 import fetchMock from 'fetch-mock';
-import { encrypt } from './mediaurl';
+import MOCK_PROGRAM from './__mocks__/program'
 
 const VALID_APIKEYS: ApiAuth = {
   appId: 'TEST_VALID_APPID',
@@ -34,12 +34,16 @@ function readJSONMock(filename: string) {
   );
 }
 
-function withMockResponseFromFile(filename: string) {
-  const data = readJSONMock(filename);
+function withMockResponse(data: string) {
   fetchMock.once('*', {
     status: 200,
     body: data
   });
+}
+
+function withMockResponseFromFile(filename: string) {
+  const data = readJSONMock(filename);
+  withMockResponse(data);
 }
 
 describe('Client', () => {
@@ -83,7 +87,7 @@ describe('Client', () => {
   });
 
   test('fetchProgram', async () => {
-    withMockResponseFromFile('program.json');
+    withMockResponse(JSON.stringify(MOCK_PROGRAM));
     const client = makeClient();
     const ID = '1-4347267';
     const program = await client.fetchProgram(ID);
@@ -102,10 +106,8 @@ describe('Client', () => {
     test('Successfully retrieves playouts and decrypts media URLs', async () => {
       withMockResponseFromFile('program-playouts.json');
       const client = makeClient();
-      const program = readJSONMock('program.json');
-  
-      const playablePublications = client.findPlayablePublicationsByProgram(program.data);
-      const playouts = await client.fetchPlayouts(program.data.id, playablePublications[0].media.id, 'HLS');
+      const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data);
+      const playouts = await client.fetchPlayouts(MOCK_PROGRAM.data.id, playablePublications[0].media!.id, 'HLS');
   
       expect(playouts.meta).toMatchObject({
         id: expect.any(String)
@@ -122,11 +124,9 @@ describe('Client', () => {
     test('Throws an error when attempting to decrypt without decryptKey', async () => {
       withMockResponseFromFile('program-playouts.json');
       const client = makeClient(VALID_APIKEYS_NO_DECRYPT);
-      const program = readJSONMock('program.json');
   
-      const playablePublications = client.findPlayablePublicationsByProgram(program.data);
-
-      const playouts = client.fetchPlayouts(program.data.id, playablePublications[0].media.id, 'HLS')
+      const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data);
+      const playouts = client.fetchPlayouts(MOCK_PROGRAM.data.id, playablePublications[0].media!.id, 'HLS')
 
       await expect(playouts).rejects.toThrowError('Missing media decryption key');
     });  

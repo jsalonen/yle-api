@@ -1,3 +1,22 @@
+export type PublicationEventType = 'ScheduledTransmission' | 'OnDemandPublication';
+export type PublicationEventTemporalStatus = 'currently' | 'in-future';
+export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE';
+export type Order =
+  'playcount.6h:asc' |
+  'playcount.6h:desc' |
+  'playcount.24h:asc' |
+  'playcount.24h:desc' |
+  'playcount.week:asc' |
+  'playcount.week:desc' |
+  'playcount.month:asc' |
+  'playcount.month:desc' |
+  'publication.starttime:asc' |
+  'publication.starttime:desc' |
+  'publication.endtime:asc' |
+  'publication.endtime:desc' |
+  'updated:asc' |
+  'updated:desc';
+
 export interface ApiAuth {
   appId: string;
   appKey: string;
@@ -29,47 +48,92 @@ export interface ProgramImage {
   version: number;
 }
 
-type PublicationEventType = 'ScheduledTransmission' | 'OnDemandPublication';
-type PublicationEventTemporalStatus = 'currently' | 'in-future';
+export interface Service {
+  id: string;
+}
+
+export interface Tags {
+  catalog: boolean;
+}
+
+export interface ContentProtection {
+  id: string;
+  type: 'ContentProtectionPolicy';
+}
+
+export interface Media {
+  id: string;
+  duration: string;
+  contentProtection: ContentProtection[];
+  available: boolean;
+  downloadable: boolean;
+  version: number;
+  type: "VideoObject";
+}
 
 export interface ProgramPublicationEvent {
-  tags: object; // TODO: add exact typing
-  service: object; // TODO: add exact typing
-  publisher: object; // TODO: add exact typing
+  tags: Tags;
+  service: Service;
+  publisher: Service[];
   startTime: string;
   temporalStatus: PublicationEventTemporalStatus;
-  endTime: string;
+  endTime?: string;
   type: PublicationEventType;
-  duration: string;
-  region: 'Finland' | string; // TODO: add missing string values
+  duration?: string;
+  region: 'Finland' | 'World';
   id: string;
-  media: any; // TODO: add exact typing
+  media?: Media;
   version: number;
+}
+
+type Language = 'fi' | 'sv';
+
+export interface Format {
+  inScheme: string;
+  type: string;
+  key: string;
+}
+
+export interface AV {
+  language: Language[];
+  format: Format[];
+}
+
+export interface Video extends AV {
+  type: 'VideoTrack';
+}
+
+export interface Audio extends AV {
+  type: 'AudioTrack';
 }
 
 export interface Program {
   description: LocalizedField;
-  video: any; // TODO: add exact typing
+  video: Video;
   typeMedia: string;
-  creator: any; // TODO: add exact typing
+  creator: unknown;
+  partOfSeason: unknown;
+  partOfSeries: unknown;
+  episodeNumber: number;
+  interactions: unknown;
   indexDataModified: string;
   alternativeId: string[];
   type: string;
   duration: string;
   productionId: string;
-  contentRating: any; // TODO: add exact typing
+  contentRating: unknown;
   title: LocalizedField;
-  itemTitle: any; // TODO: add exact typing
+  itemTitle: unknown;
   countryOfOrigin: string[];
   id: string;
   typeCreative: string;
   image: ProgramImage;
-  audio: any[]; // TODO: add exact typing
-  originalTitle: object; // TODO: add exact typing
+  audio: Audio[];
+  originalTitle: unknown;
   publicationEvent: ProgramPublicationEvent[];
   collection: string;
-  subject: object[]; // TODO: add exact typing
-  subtitling: object[]; // TODO: add exact typing
+  subject: unknown[];
+  subtitling: unknown[];
 }
 
 export interface MediaPlayout {
@@ -79,13 +143,17 @@ export interface MediaPlayout {
   formatOf: string;
   width: number;
   height: number;
-  type: string; // TODO: add exact typing
+  type: string;
   url: string;
   live: boolean;
-  protectionType: string; // TODO: add exact typing
+  protectionType: string;
 }
 
-export interface ApiResponseProgram extends ApiResponse {
+export interface ApiResponseProgram {
+  apiVersion: string;
+  meta: {
+    id: string;
+  }
   data: Program;
 }
 
@@ -101,7 +169,7 @@ export interface ApiRequestPrograms {
   category?: string; // Multiple IDs can be passed as a comma separated list.
   series?: string; // Multiple IDs can be passed as a comma separated list.
   availability?: 'ondemand' | 'future-ondemand' | 'future-scheduled' | 'in-future';
-  downloadable?: 'true' | undefined;
+  downloadable?: 'true';
   language?: 'fi' | 'sv';
   region?: 'fi' | 'world';
   service?: string; // Multiple service IDs can be passes as a comma separated list.
@@ -122,21 +190,3 @@ export interface ApiRequestProgramsNow {
 export interface ApiResponseMediaPlayouts extends ApiResponse {
   data: MediaPlayout[];
 }
-
-export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE';
-
-export type Order =
-  'playcount.6h:asc' |
-  'playcount.6h:desc' |
-  'playcount.24h:asc' |
-  'playcount.24h:desc' |
-  'playcount.week:asc' |
-  'playcount.week:desc' |
-  'playcount.month:asc' |
-  'playcount.month:desc' |
-  'publication.starttime:asc' |
-  'publication.starttime:desc' |
-  'publication.endtime:asc' |
-  'publication.endtime:desc' |
-  'updated:asc' |
-  'updated:desc';
