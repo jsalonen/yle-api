@@ -2,7 +2,6 @@ import Client, { IMAGES_URL } from './client';
 import { ApiAuth } from './client.types';
 import * as fs from 'fs';
 import * as path from 'path';
-import fetchMock from 'fetch-mock';
 import MOCK_PROGRAM from './__mocks__/program'
 
 const VALID_APIKEYS: ApiAuth = {
@@ -22,8 +21,13 @@ const INVALID_APIKEYS: ApiAuth = {
   decryptKey: 'TEST_INVALID_DECRYPTKEY'
 };
 
-function makeClient(credentials = VALID_APIKEYS) {
-  return new Client(credentials, fetchMock.sandbox() as any); 
+const mockFetchResultWith = (data: any) => {
+  const fetchMock = jest.fn();
+  fetchMock.mockResolvedValueOnce({
+    ok: true,
+    json: () => data
+  });
+  return fetchMock;
 }
 
 function readJSONMock(filename: string) {
@@ -34,24 +38,11 @@ function readJSONMock(filename: string) {
   );
 }
 
-function withMockResponse(data: string) {
-  fetchMock.once('*', {
-    status: 200,
-    body: data
-  });
-}
-
-function withMockResponseFromFile(filename: string) {
-  const data = readJSONMock(filename);
-  withMockResponse(data);
-}
-
 describe('Client', () => {
-  afterEach(fetchMock.restore);
 
   test('fetchPrograms', async () => {
-    withMockResponseFromFile('programs.json');
-    const client = makeClient();
+    const data = readJSONMock('programs.json');
+    const client = new Client(VALID_APIKEYS, mockFetchResultWith(data)); 
     const programs = await client.fetchPrograms({q: 'Uutiset'});
 
     expect(programs.meta).toMatchObject({
@@ -69,8 +60,8 @@ describe('Client', () => {
   });
 
   test('fetchProgramsNow', async () => {
-    withMockResponseFromFile('programs-now.json');
-    const client = makeClient();
+    const data = readJSONMock('programs-now.json');
+    const client = new Client(VALID_APIKEYS, mockFetchResultWith(data)); 
     const programs = await client.fetchProgramsNow();
 
     expect(programs.meta).toMatchObject({
@@ -87,8 +78,8 @@ describe('Client', () => {
   });
 
   test('fetchProgram', async () => {
-    withMockResponse(JSON.stringify(MOCK_PROGRAM));
-    const client = makeClient();
+    const data = MOCK_PROGRAM;
+    const client = new Client(VALID_APIKEYS, mockFetchResultWith(data));
     const ID = '1-4347267';
     const program = await client.fetchProgram(ID);
 
@@ -104,8 +95,8 @@ describe('Client', () => {
   
   describe('fetchPlayouts', () => {
     test('Successfully retrieves playouts and decrypts media URLs', async () => {
-      withMockResponseFromFile('program-playouts.json');
-      const client = makeClient();
+      const data = readJSONMock('program-playouts.json');
+      const client = new Client(VALID_APIKEYS, mockFetchResultWith(data)); 
       const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data);
       const playouts = await client.fetchPlayouts(MOCK_PROGRAM.data.id, playablePublications[0].media!.id, 'HLS');
   
@@ -122,8 +113,8 @@ describe('Client', () => {
     });
 
     test('Throws an error when attempting to decrypt without decryptKey', async () => {
-      withMockResponseFromFile('program-playouts.json');
-      const client = makeClient(VALID_APIKEYS_NO_DECRYPT);
+      const data = readJSONMock('program-playouts.json');
+      const client = new Client(VALID_APIKEYS_NO_DECRYPT, mockFetchResultWith(data)); 
   
       const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data);
       const playouts = client.fetchPlayouts(MOCK_PROGRAM.data.id, playablePublications[0].media!.id, 'HLS')
@@ -133,25 +124,20 @@ describe('Client', () => {
   });
 
   test('invalid api keys return 401 on all methods', async () => {
-    fetchMock.mock('*', {
-      status: 401,
-      body: 'Unauthorized'
+    const fetchMock = jest.fn()
+    fetchMock.mockResolvedValue({
+      ok: false,
+      statusText: 'Unauthorized'
     });
-    const client = makeClient(INVALID_APIKEYS);
-    const requests = [
-      client.fetchPrograms({}),
-      client.fetchProgramsNow(),
-      client.fetchProgram('1'),
-      client.fetchPlayouts('1', '1', 'HLS')
-    ];
-
-    requests.forEach(async (request) => {
-      await expect(request).rejects.toEqual('Unauthorized');;
-    });
+    const client = new Client(INVALID_APIKEYS, fetchMock);
+    await expect(client.fetchPrograms({})).rejects.toEqual('Unauthorized');;
+    await expect(client.fetchProgramsNow()).rejects.toEqual('Unauthorized');;
+    await expect(client.fetchProgram('1')).rejects.toEqual('Unauthorized');;
+    await expect(client.fetchPlayouts('1', '1', 'HLS')).rejects.toEqual('Unauthorized');;
   });
 
   test('getImageUrl', () => {
-    const client = makeClient();
+    const client = new Client(VALID_APIKEYS, jest.fn());
     const url = client.getImageUrl('image1', 'jpg', {
       width: 1920,
       height: 1080,
@@ -163,25 +149,20 @@ describe('Client', () => {
 });
 
 describe('trackStreamStart', () => {
-  afterEach(fetchMock.restore);
 
   test('returns 200 OK on successful track event registration', async () => {
-    fetchMock.once('*', {
-      status: 200,
-      body: ''
-    });
-
-    const client = makeClient(VALID_APIKEYS);
+    const client = new Client(VALID_APIKEYS, mockFetchResultWith(jest.fn(() => ({ ok: true }))));
     await client.trackStreamStart('valid-program-id', 'valid-media-id');
   });
 
   test('returns 400 Bad Request with invalid or missing parameters', async () => {
-    fetchMock.once('*', {
+    const fetchMock = jest.fn();
+    fetchMock.mockResolvedValueOnce({
+      ok: false,
       status: 400,
-      body: 'Bad Request'
+      statusText: 'Bad Request'
     });
-
-    const client = makeClient(VALID_APIKEYS);
+    const client = new Client(VALID_APIKEYS, fetchMock);
     const trackStreamStart = client.trackStreamStart('valid-program-id', '');
     await expect(trackStreamStart).rejects.toEqual('Track stream failed: 400 Bad Request')
   });

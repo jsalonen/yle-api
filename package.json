@@ -19,18 +19,16 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@types/node-fetch": "^2.1.2",
     "commander": "^2.9.0",
     "node-fetch": "^2.2.0",
     "urijs": "^1.19.1"
   },
   "devDependencies": {
-    "@types/fetch-mock": "^6.0.3",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.9.4",
-    "@types/node-fetch": "^2.1.2",
     "@types/urijs": "^1.15.38",
     "coveralls": "^3.0.2",
-    "fetch-mock": "^6.0.3",
     "jest": "^23.5.0",
     "ts-jest": "^23.1.4",
     "typescript": "^3.0.3"
