@@ -1,4 +1,6 @@
-{
+import { ApiResponsePrograms } from '../client.types';
+
+const programs: ApiResponsePrograms = {
   "apiVersion": "1.1.322",
   "meta": {
     "offset": "0",
@@ -6994,3 +6996,5 @@
     }
   ]
 }
+
+export default programs
