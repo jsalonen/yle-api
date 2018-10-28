@@ -190,3 +190,14 @@ export interface ApiRequestProgramsNow {
 export interface ApiResponseMediaPlayouts extends ApiResponse {
   data: MediaPlayout[]
 }
+
+export interface ApiRequestProgramsNow {
+  service?: string // Multiple service IDs can be passes as a comma separated list.
+  start?: number // Allowed values range from -10 to 0. -1 means that the previous program will be included
+  end?: number // Allowed values range from 0 to 10. 1 means that the next program will be included
+  mediaobject?: 'video' | 'audio'
+}
+
+export interface ApiResponseMediaPlayouts extends ApiResponse {
+  data: MediaPlayout[]
+}
