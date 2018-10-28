@@ -1,4 +1,6 @@
-{
+import { ApiResponseProgramsNow } from '../client.types';
+
+const programs: ApiResponseProgramsNow = {
   "apiVersion": "1.1.322",
   "meta": {
     "start": 0,
@@ -15381,3 +15383,5 @@
     }
   ]
 }
+
+export default programs

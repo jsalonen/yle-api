@@ -4,10 +4,10 @@ import {
   ApiAuth,
   ApiRequestPrograms,
   ApiRequestProgramsNow,
-  ApiResponse,
   ApiResponseMediaPlayouts,
   ApiResponseProgram,
   ApiResponsePrograms,
+  ApiResponseProgramsNow,
   PlayoutProtocol,
   Program,
   ProgramPublicationEvent
@@ -44,7 +44,7 @@ class Client {
     return this.retrieveJSONOrError(response)
   }
 
-  public async fetchProgramsNow(queryOptions: ApiRequestProgramsNow = {}): Promise<ApiResponse> {
+  public async fetchProgramsNow(queryOptions: ApiRequestProgramsNow = {}): Promise<ApiResponseProgramsNow> {
     const url =
       URI(API_URL)
         .segment('programs')

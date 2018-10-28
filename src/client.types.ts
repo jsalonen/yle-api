@@ -1,5 +1,5 @@
 export type PublicationEventType = 'ScheduledTransmission' | 'OnDemandPublication'
-export type PublicationEventTemporalStatus = 'currently' | 'in-future'
+export type PublicationEventTemporalStatus = 'in-past' | 'currently' | 'in-future'
 export type PlayoutProtocol = 'HLS' | 'HDS' | 'PMD' | 'RTMPE'
 export type Order =
   'playcount.6h:asc' |
@@ -23,29 +23,8 @@ export interface ApiAuth {
   decryptKey?: string
 }
 
-export interface ApiResponseMetadata {
-  offset: string
-  limit: string
-  count: number
-  program: number
-  clip: number
-}
-
-export interface ApiResponse {
-  apiVersion: string
-  meta: ApiResponseMetadata
-  data: any
-}
-
 export interface LocalizedField {
   [key: string]: string
-}
-
-export interface ProgramImage {
-  id: string
-  available: boolean
-  type: string
-  version: number
 }
 
 export interface Service {
@@ -72,7 +51,7 @@ export interface Media {
 }
 
 export interface ProgramPublicationEvent {
-  tags: Tags
+  tags?: Tags
   service: Service
   publisher: Service[]
   startTime: string
@@ -86,7 +65,9 @@ export interface ProgramPublicationEvent {
   version: number
 }
 
-type Language = 'fi' | 'sv'
+export interface ProgramNow extends ProgramPublicationEvent {
+  content: Program
+}
 
 export interface Format {
   inScheme: string
@@ -95,7 +76,7 @@ export interface Format {
 }
 
 export interface AV {
-  language: Language[]
+  language: Array<'fi' | 'sv' | 'en'>
   format: Format[]
 }
 
@@ -112,22 +93,27 @@ export interface Program {
   video: Video
   typeMedia: string
   creator: unknown
-  partOfSeason: unknown
-  partOfSeries: unknown
-  episodeNumber: number
-  interactions: unknown
-  indexDataModified: string
+  partOfSeason?: unknown
+  partOfSeries?: unknown
+  episodeNumber?: number
+  interactions?: unknown
+  indexDataModified?: string
   alternativeId: string[]
   type: string
   duration: string
-  productionId: string
+  productionId?: string
   contentRating: unknown
   title: LocalizedField
   itemTitle: unknown
   countryOfOrigin: string[]
   id: string
   typeCreative: string
-  image: ProgramImage
+  image: {
+    id?: string
+    available?: boolean
+    type?: string
+    version?: number
+  }
   audio: Audio[]
   originalTitle: unknown
   publicationEvent: ProgramPublicationEvent[]
@@ -147,18 +133,6 @@ export interface MediaPlayout {
   url: string
   live: boolean
   protectionType: string
-}
-
-export interface ApiResponseProgram {
-  apiVersion: string
-  meta: {
-    id: string;
-  }
-  data: Program
-}
-
-export interface ApiResponsePrograms extends ApiResponse {
-  data: Program[]
 }
 
 export interface ApiRequestPrograms {
@@ -187,10 +161,6 @@ export interface ApiRequestProgramsNow {
   mediaobject?: 'video' | 'audio'
 }
 
-export interface ApiResponseMediaPlayouts extends ApiResponse {
-  data: MediaPlayout[]
-}
-
 export interface ApiRequestProgramsNow {
   service?: string // Multiple service IDs can be passes as a comma separated list.
   start?: number // Allowed values range from -10 to 0. -1 means that the previous program will be included
@@ -198,6 +168,39 @@ export interface ApiRequestProgramsNow {
   mediaobject?: 'video' | 'audio'
 }
 
+export interface ApiResponse {
+  apiVersion: string
+}
+
+export interface ApiResponseProgram extends ApiResponse {
+  meta: {
+    id: string
+  }
+  data: Program
+}
+
+export interface ApiResponsePrograms extends ApiResponse {
+  meta: {
+    offset: string
+    limit: string
+    count: number
+    program: number
+    clip: number
+  }
+  data: Program[]
+}
+
+export interface ApiResponseProgramsNow extends ApiResponse {
+  meta: {
+    start: number
+    end: number
+  }
+  data: ProgramNow[]
+}
+
 export interface ApiResponseMediaPlayouts extends ApiResponse {
+  meta: {
+    id: string
+  }
   data: MediaPlayout[]
 }

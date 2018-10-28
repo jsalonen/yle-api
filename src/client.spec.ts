@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import MOCK_PROGRAM from './__mocks__/program'
+import MOCK_PROGRAMS_NOW from './__mocks__/programs-now'
 import Client, { IMAGES_URL } from './client'
 import { ApiAuth } from './client.types'
 
@@ -60,7 +61,7 @@ describe('Client', () => {
   })
 
   test('fetchProgramsNow', async () => {
-    const data = readJSONMock('programs-now.json')
+    const data = MOCK_PROGRAMS_NOW
     const client = new Client(VALID_APIKEYS, mockFetchResultWith(data))
     const programs = await client.fetchProgramsNow()
 
