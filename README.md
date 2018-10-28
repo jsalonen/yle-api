@@ -9,7 +9,7 @@ Features:
 - Good test coverage
 - Minimal dependencies
 
-**Work in progress. All contributions (pull requests, issues, comments) welcome!**
+**Work in progress. All contributions (pull requests, issues, comments) are welcome!**
 
 ## Requirements
 
