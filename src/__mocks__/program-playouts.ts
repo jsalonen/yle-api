@@ -1,4 +1,6 @@
-{
+import { ApiResponseMediaPlayouts } from '../client.types'
+
+const playouts: ApiResponseMediaPlayouts = {
   "meta": {
     "id": "12345"
   },
@@ -24,3 +26,5 @@
   ],
   "notifications": {}
 }
+
+export default playouts

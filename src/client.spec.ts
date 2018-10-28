@@ -1,9 +1,12 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import MOCK_PROGRAM from './__mocks__/program'
-import MOCK_PROGRAMS_NOW from './__mocks__/programs-now'
 import Client, { IMAGES_URL } from './client'
 import { ApiAuth } from './client.types'
+
+import MOCK_PROGRAM from './__mocks__/program'
+import MOCK_PROGRAM_PLAYOUTS from './__mocks__/program-playouts'
+import MOCK_PROGRAMS from './__mocks__/programs'
+import MOCK_PROGRAMS_NOW from './__mocks__/programs-now'
 
 const VALID_APIKEYS: ApiAuth = {
   appId: 'TEST_VALID_APPID',
@@ -31,18 +34,10 @@ const mockFetchResultWith = (data: any) => {
   return fetchMock
 }
 
-function readJSONMock(filename: string) {
-  return JSON.parse(
-    fs.readFileSync(
-      path.join(__dirname, '__mocks__', filename)
-    ).toString()
-  )
-}
-
 describe('Client', () => {
 
   test('fetchPrograms', async () => {
-    const data = readJSONMock('programs.json')
+    const data = MOCK_PROGRAMS
     const client = new Client(VALID_APIKEYS, mockFetchResultWith(data))
     const programs = await client.fetchPrograms({q: 'Uutiset'})
 
@@ -95,7 +90,7 @@ describe('Client', () => {
 
   describe('fetchPlayouts', () => {
     test('Successfully retrieves playouts and decrypts media URLs', async () => {
-      const data = readJSONMock('program-playouts.json')
+      const data = MOCK_PROGRAM_PLAYOUTS
       const client = new Client(VALID_APIKEYS, mockFetchResultWith(data))
       const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data)
       const playouts = await client.fetchPlayouts(MOCK_PROGRAM.data.id, playablePublications[0].media!.id, 'HLS')
@@ -113,7 +108,7 @@ describe('Client', () => {
     })
 
     test('Throws an error when attempting to decrypt without decryptKey', async () => {
-      const data = readJSONMock('program-playouts.json')
+      const data = MOCK_PROGRAM_PLAYOUTS
       const client = new Client(VALID_APIKEYS_NO_DECRYPT, mockFetchResultWith(data))
 
       const playablePublications = client.findPlayablePublicationsByProgram(MOCK_PROGRAM.data)

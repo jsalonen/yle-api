@@ -186,6 +186,7 @@ export interface ApiResponsePrograms extends ApiResponse {
     count: number
     program: number
     clip: number
+    q: string
   }
   data: Program[]
 }
@@ -198,9 +199,10 @@ export interface ApiResponseProgramsNow extends ApiResponse {
   data: ProgramNow[]
 }
 
-export interface ApiResponseMediaPlayouts extends ApiResponse {
+export interface ApiResponseMediaPlayouts {
   meta: {
     id: string
   }
   data: MediaPlayout[]
+  notifications: unknown
 }
