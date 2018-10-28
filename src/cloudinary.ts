@@ -6,26 +6,26 @@
 */
 
 export interface CloudinaryImageTransformations {
-  width?: number;
-  height?: number;
-  crop?: 'fit' | 'fill' | 'limit';
+  width?: number
+  height?: number
+  crop?: 'fit' | 'fill' | 'limit'
 }
 
-export type CloudinaryImageFormat = 'jpg' | 'png' | 'gif';
+export type CloudinaryImageFormat = 'jpg' | 'png' | 'gif'
 
 export function makeImageTransformationString(transformations: CloudinaryImageTransformations) {
-  let commands = [];
-  const {width, height, crop} = transformations;
-  if(width !== undefined) {
-    commands.push(`w_${width}`);
+  const commands = []
+  const {width, height, crop} = transformations
+  if (width !== undefined) {
+    commands.push(`w_${width}`)
   }
-  if(height !== undefined) {
-    commands.push(`h_${height}`);
+  if (height !== undefined) {
+    commands.push(`h_${height}`)
   }
-  switch(crop) {
-    case 'fit': commands.push('c_fit'); break;
-    case 'fill': commands.push('c_fill'); break;
-    case 'limit': commands.push('c_limit'); break;
+  switch (crop) {
+    case 'fit': commands.push('c_fit'); break
+    case 'fill': commands.push('c_fill'); break
+    case 'limit': commands.push('c_limit'); break
   }
-  return commands.join(',');
+  return commands.join(',')
 }
