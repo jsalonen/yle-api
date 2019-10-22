@@ -20,19 +20,19 @@
   },
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.19.0",
-    "node-fetch": "^2.3.0",
-    "urijs": "^1.19.1"
+    "commander": "^3.0.2",
+    "node-fetch": "^2.6.0",
+    "urijs": "^1.19.2"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.9",
-    "@types/node": "^10.12.9",
-    "@types/node-fetch": "^2.1.4",
-    "@types/urijs": "^1.15.38",
-    "coveralls": "^3.0.2",
-    "jest": "^23.6.0",
-    "ts-jest": "^23.10.4",
-    "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.2",
+    "@types/node-fetch": "^2.5.2",
+    "@types/urijs": "^1.19.4",
+    "coveralls": "^3.0.7",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
   }
 }
