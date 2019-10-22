@@ -1,4 +1,4 @@
-# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/github/jsalonen/yle-api/badge.svg?branch=master)](https://coveralls.io/github/jsalonen/yle-api?branch=master)
+# yle-api [![Build Status](https://travis-ci.org/jsalonen/yle-api.svg?branch=master&cachebust=1)](https://travis-ci.org/jsalonen/yle-api) [![Coverage Status](https://coveralls.io/repos/github/jsalonen/yle-api/badge.svg?branch=master)](https://coveralls.io/github/jsalonen/yle-api?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/jsalonen/yle-api.svg)](https://greenkeeper.io/)
  
 Unofficial Yle API SDK for Node.js
 
