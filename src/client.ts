@@ -1,4 +1,4 @@
-import fetch, { Response } from 'node-fetch'
+import fetch, { Response, RequestInfo, RequestInit } from 'node-fetch'
 import URI from 'urijs'
 import {
   ApiAuth,
@@ -22,11 +22,13 @@ import { decrypt } from './mediaurl'
 const API_URL = 'https://external.api.yle.fi/v1/'
 export const IMAGES_URL = 'https://images.cdn.yle.fi/image/upload/'
 
+type Fetcher = (url: RequestInfo, init?: RequestInit) => Promise<Response>
+
 class Client {
   public apiAuth: ApiAuth
-  public fetcher: typeof fetch
+  public fetcher: Fetcher
 
-  constructor(apiAuth: ApiAuth, fetcher: typeof fetch = fetch) {
+  constructor(apiAuth: ApiAuth, fetcher: Fetcher = fetch) {
     this.apiAuth = apiAuth
     this.fetcher = fetcher
   }
